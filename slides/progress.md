@@ -1,5 +1,5 @@
 % Project Aleph Progress Report
-% Ross Barnowski, Matthew Brett, Jarrod Millman
+% Min Gu Jo, Tim Yu, Soazig, Ye Zhi, Zhuangdi Li
 % November 12, 2015
 
 # Background
@@ -16,7 +16,9 @@
 
 ## The Method
 
+- PCA
 - linear regression
+
 
 # Initial work
 
