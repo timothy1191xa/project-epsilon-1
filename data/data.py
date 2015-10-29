@@ -30,5 +30,3 @@ def check_hashes(d):
     return all_good
 
 
-if __name__ == "__main__":
-    check_hashes(d)
