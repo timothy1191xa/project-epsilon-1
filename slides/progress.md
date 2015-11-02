@@ -1,24 +1,28 @@
-% Project Aleph Progress Report
-% Min Gu Jo, Tim Yu, Soazig, Ye Zhi, Zhuangdi Li
+% Project Epsilon Progress Report
+% Min Gu Jo, Kaam Soazig, Timothy Yu, Ye Zhi, Zhuangdi Li
 % November 12, 2015
 
 # Background
 
+The Neural Basis of Loss Aversion in Decision-Making Under Risk
+
+
 ## The Paper
 
 - from OpenFMRI.org
-- ds001
+- https://www.openfmri.org/dataset/ds000005
+
 
 ## The Data
 
-- 12 subjects
-- 2 conditions per subject
+- 16 subjects
+- multiple conditions per subject
+
+
 
 ## The Method
 
-- PCA
 - linear regression
-
 
 # Initial work
 
