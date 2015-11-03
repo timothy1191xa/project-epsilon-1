@@ -29,4 +29,7 @@ def check_hashes(d):
             all_good = False
     return all_good
 
+if __name__ == "__main__":
+    check_hashes(d)
+
 
