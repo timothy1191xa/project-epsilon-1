@@ -2,10 +2,8 @@ download:
 	wget http://openfmri.s3.amazonaws.com/tarballs/ds005_raw.tgz
 	tar xvzf ds005_raw.tgz
 
-data: 
-	wget http://openfmri.s3.amazonaws.com/tarballs/ds005_raw_checksums.txt
-
 validate:
+	wget http://openfmri.s3.amazonaws.com/tarballs/ds005_raw_checksums.txt
 	python data.py
 
 unzip:
