@@ -47,6 +47,7 @@ def pearson_1d(x, y):
     return a / (np.sqrt(b) * np.sqrt(c))
 
 
+
 def pearson_2d(x, Y):
     """ Pearson product-moment correlation of vectors `x` and array `Y`
 
@@ -78,4 +79,3 @@ def pearson_2d(x, Y):
     c = np.sum(mc_Y ** 2, axis=0)
     # return a / (sqrt(b) * sqrt(c))
     return a / (np.sqrt(b) * np.sqrt(c))
-
