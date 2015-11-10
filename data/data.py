@@ -12,16 +12,18 @@ def create_dict(filename):
     for line,i in zip(f,range(0,num_lines)):
         info = line.split()
         newDict[info[1]]=info[0]
+    f.close()
     return newDict
 
 def generate_file_md5(filename, blocksize=2**20):
     m = hashlib.md5()
-    f= open(filename)
+    f= open(filename,"rb")
     while True:
         buf = f.read(blocksize)
         if not buf:
             break
         m.update(buf)
+    f.close()
     return m.hexdigest()
 
 
