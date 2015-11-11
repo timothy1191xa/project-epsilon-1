@@ -36,13 +36,6 @@ def check_hashes(newDict):
             all_good = False
     return all_good
 
-<<<<<<< HEAD
-if __name__ == "__main__":
-    check_hashes(d)
-
-
-=======
 if __name__=="__main__":
     newDict = create_dict('ds005_raw_checksums.txt')
     print(check_hashes(newDict))
->>>>>>> de3595bdf7c3fd13f11b94b8edf990a6c80645d3

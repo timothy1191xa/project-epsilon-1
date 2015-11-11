@@ -14,6 +14,3 @@ behav3=np.loadtxt(data_location+'sub001/behav/task001_run001/behavdata.txt',skip
 behav_total_run=np.concatenate((behav1,behav2,behav3),axis=0)
 
 """delete the rows that contain -1 in respcat (these are errors in experiment so we should take them out"""
-behavior=np.delete(behav_total_run, np.where(behav_total_run[:,5]==-1),axis=0)
-
-print(your "behavior" is ready to use!)
