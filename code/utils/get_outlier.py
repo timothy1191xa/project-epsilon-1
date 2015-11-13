@@ -8,7 +8,7 @@ from itertools import product
 import diagnostics
 reload(diagnostics) 
 
-img=nib.load('ds005/sub001/BOLD/task001_run001/bold.nii')
+img=nib.load('ds005/sub002/BOLD/task001_run001/bold.nii')
 data=img.get_data()
 
 """get std"""
