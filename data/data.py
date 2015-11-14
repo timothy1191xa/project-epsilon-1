@@ -2,8 +2,7 @@ from __future__ import print_function, division
 
 import hashlib
 import os
-
-
+import codecs
 
 def create_dict(filename):
     newDict={}
@@ -12,6 +11,7 @@ def create_dict(filename):
     for line,i in zip(f,range(0,num_lines)):
         info = line.split()
         newDict[info[1]]=info[0]
+    f.close()
     return newDict
 
 def generate_file_md5(filename, blocksize=2**20):
@@ -19,9 +19,11 @@ def generate_file_md5(filename, blocksize=2**20):
     f= open(filename)
     while True:
         buf = f.read(blocksize)
+        codecs.encode(buf,'ISO-8859-1')
         if not buf:
             break
         m.update(buf)
+    f.close()
     return m.hexdigest()
 
 
