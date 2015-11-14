@@ -1,0 +1,24 @@
+\section{Our Research Plan}
+\subsection{Behavior data}
+\begin{itemize}
+\item Use other classification methods than logistic regression to predict gamble/not 
+gamble\\
+For now, we fit logistic regression to use gain/loss/ratio to predict whether a person would take the gamble. Also, we might try other machine learning/classification methods, such as K-nearest neighbor and Tree based model. Other than using gain/loss as predictors, we can use other independent variables such as subjects’ response time and their confidence level in their decision to see how they affect their decision. We can select our train set to classify the whole data for each subject and test the classification.
+\item Explore correlation between neural activity (image data) and behavior data (survey data)\\
+For example, we can try to fit linear regression model between each voxel and gain/loss/ratio and other predictors.
+\end{itemize}
+
+\subsection{Model validation}
+\begin{itemize}
+\item Check assumptions of the regression models: normality, independence, equality of  variance
+\item Use cross validations to test our model accuracy: divide our data sets into testing and validation sets
+\end{itemize}
+\subsection{Modeling voxels for each participant}
+\begin{itemize}
+\item Use convolved hemodynamic response and linear regression for each participant\\
+We can train the model using two randomly selected runs and validated the model using the third run.
+\item Investigate for more suited shape parameters for the Gamma function primarily with literature review
+\end{itemize}
+\subsection{BOLD image data analysis}
+Prior to analysis, we would undergo preprocessing of our image data by slice timing correction. We will try to shift each voxel’s time course so that we can assume as if they were measured simultaneously. Then, using convolved data on our image data of subject from HRF as a beta of our linear regression model, we might try to predict each voxel of an image and later combine to have a 3D-image of a person who decided to gamble or not.
+
