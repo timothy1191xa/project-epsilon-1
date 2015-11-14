@@ -1,8 +1,16 @@
 \documentclass[11pt]{article}
 
 \usepackage[margin=0.75in]{geometry}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
 
-\title{STAT 159/259 Project proposal }
+\bibliographystyle{siam}
+
+\title{Project Epsilon progress report \\ The Neural Basis of Loss Aversion in Decision-Making Under Risk}
+
 \author{
   Jo, Min Gu\\
   \texttt{mingujo}
@@ -20,29 +28,18 @@
   \texttt{ye-zhi}
   }
 
-\bibliographystyle{siam}
-
 \begin{document}
 \maketitle
 
-\abstract{You should have a short abstract.}
+\input{sections_progress/introduction.tex}
 
-\section{Introduction}
+\input{sections_progress/data.tex}
 
-Identify a published fMRI paper and the accompanying data
-\cite{lindquist2008statistical}.  You should explain the basic idea of the
-paper in a paragraph.  You should also perform basic sanity check on the data
-(e.g., can you downloaded, can you load the files, confirm that you have the
-correct number of subjects).
+\input{sections_progress/our_process.tex}
 
-Briefly explain what reproducibility means and in what sense you will
-try to reproduce this study.
+\input{sections_progress/problems_and_issues.tex}
 
-\section{Data}
-
-\section{Methods}
-\section{Results}
-\section{Discussion}
+\input{sections_progress/feedback.tex}
 
 
 \bibliography{project}
