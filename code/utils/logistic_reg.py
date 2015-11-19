@@ -5,6 +5,7 @@ import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 from statsmodels.formula.api import logit, ols
+import sys
 
 #PREDICT SUBJECT's DECISION TO WHETHER GAMBLE OR NOT GIVEN WITH GAIN AND LOSS AMOUNT using LOGISTIC REGRESSION
 #predictors : gain, loss, respnum
@@ -90,6 +91,11 @@ def log_regression(run_final):
 	plt.savefig('log_regression.png')
 	plt.show()
 	return 
+
+if __name__ == '__main__':
+    a=add_gainlossratio(int(sys.argv[1]))
+    b=organize_columns(a)
+    log_regression(b)
 
 
 
