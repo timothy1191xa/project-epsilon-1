@@ -1,3 +1,12 @@
+"""
+Purpose:
+-----------------------------------------------------------------------------------
+We make the extraction of txt file to be easier by building these functions. 
+-----------------------------------------------------------------------------------
+"""
+
+
+
 import numpy as np
 import pandas as pd
 
@@ -6,6 +15,19 @@ data_location=project_location+"data/ds005/"
 
 """load and combine 3 behavior datas from 3 runs"""
 def load_behav_txt(subject_number):
+	""" Return the subject behav data combining all 3 runs and excluding invalid data (-1) in np.array
+
+    Parameters
+    ----------
+    subject_number : int
+    	Subject Number
+    
+    Returns
+    -------
+    behav_total_run : np.array
+    	the subject's behav data (combining all 3 runs)
+        
+    """
 
 	#load texts
 	behav1=np.loadtxt(data_location+'sub00%s/behav/task001_run001/behavdata.txt'%(subject_number),skiprows=1)
@@ -22,9 +44,49 @@ def load_behav_txt(subject_number):
 
 	return behav_total_run
 
-"""load in pandas data frame"""
-def load_in_dataframe(subject_number):
 
+def load_behav_text_one(subject_number, run_number):
+	""" Return the subject behav data (single run) in np.array
+
+    Parameters
+    ----------
+    subject_number : int
+    	Subject Number
+    run_number : int
+    	Run Number	
+    
+    Returns
+    -------
+    behav_total_run : data.frame
+    	the subject's behav data (single run)
+        
+    """
+
+	behav=np.loadtxt(data_location+'sub00%s/behav/task001_run00%s/behavdata.txt'%(subject_number,run_number),
+		skiprows=1)
+
+	#delete the rows that contain -1 in respcat (these are errors in experiment so we should take them out
+	behav_run=np.delete(behav, np.where(behav[:,5]==-1),axis=0)		
+	print('your behav_run is ready to use!')
+
+	return behav_run
+
+
+
+def load_in_dataframe(subject_number):
+	""" Return the subject behav data combining all 3 runs and excluding invalid data (-1) in data.frame
+
+    Parameters
+    ----------
+    subject_number : int
+    	Subject Number
+    
+    Returns
+    -------
+    behav_total_run : data.frame
+    	the subject's behav data (combining all 3 runs)
+        
+    """
 
 	#convert 3 behavior datas in 1 subject into data frames.
 	run1 = pd.read_table(data_location+'sub00%s/behav/task001_run001/behavdata.txt'%(subject_number))
@@ -36,4 +98,50 @@ def load_in_dataframe(subject_number):
 	run_total=r.append(run3) 
 	
 	return run_total
+
+def load_model_one(subject_number, run_number):
+	""" Return the model (conditions) of subject's single run
+
+    Parameters
+    ----------
+    subject_number : int
+    	Subject Number
+    run_number : int
+    	Run Number	
+    
+    Returns
+    -------
+    task : np.array
+    	the model (conditions) of subject's single run 
+    gain : np.array
+    	the model (conditions) of subject's single run
+    loss : np.array
+    	the model (conditions) of subject's single run
+    dist : np.array
+    	the model (conditions) of subject's single run
+        
+    """
+
+	task=np.loadtxt(data_location+'sub00%s/model/model001/onsets/task001_run00%s/cond001.txt'%(subject_number,run_number),
+		skiprows=1)
+	gain=np.loadtxt(data_location+'sub00%s/model/model001/onsets/task001_run00%s/cond002.txt'%(subject_number,run_number),
+		skiprows=1)
+	loss=np.loadtxt(data_location+'sub00%s/model/model001/onsets/task001_run00%s/cond003.txt'%(subject_number,run_number),
+		skiprows=1)
+	dist=np.loadtxt(data_location+'sub00%s/model/model001/onsets/task001_run00%s/cond004.txt'%(subject_number,run_number),
+		skiprows=1)
+
+	#delete the rows that contain -1 in respcat (these are errors in experiment so we should take them out
+
+	return task, gain, loss, dist
+
+
+
+
+
+
+
+
+
+
 	
