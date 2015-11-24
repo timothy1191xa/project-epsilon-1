@@ -3,5 +3,5 @@ numpy==1.9.2
 scipy==0.16.0
 matplotlib==1.4.3
 pandas==0.16.2
-statsmodels.api==0.6.1
+statsmodels==0.6.1
 nibabel==2.0.1

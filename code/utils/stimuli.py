@@ -1,4 +1,29 @@
+import scipy.stats
+from scipy.stats import gamma
 import numpy as np
+import matplotlib.pyplot as plt
+import nibabel as nib
+
+
+
+def hrf(times):
+     """ Return values for HRF at given times """
+     # Gamma pdf for the peak
+     peak_values = gamma.pdf(times, 6)
+     # Gamma pdf for the undershoot
+     undershoot_values = gamma.pdf(times, 12)
+     # Combine them
+     values = peak_values - 0.35 * undershoot_values
+     # Scale max to 0.6
+     return values / np.max(values) * 0.6
+
+
+""" 
+Functions to work with standard OpenFMRI stimulus files
+The functions have docstrings according to the numpy docstring standard - see:
+https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
+"""
+
 
 def events2neural(task_fname, tr, n_trs):
     """ Return predicted neural time course from event file `task_fname`
@@ -11,11 +36,11 @@ def events2neural(task_fname, tr, n_trs):
         TR in seconds
     n_trs : int
         Number of TRs in functional run
-
     Returns
     -------
     time_course : array shape (n_trs,)
         Predicted neural time course, one value per TR
+
     """
     task = np.loadtxt(task_fname)
     # Check that the file is plausibly a task file
@@ -28,3 +53,132 @@ def events2neural(task_fname, tr, n_trs):
     for onset, duration, amplitude in task:
         time_course[onset:onset + duration] = amplitude
     return time_course
+
+def events2neural_high(cond_data, TR=2, n_trs=240, tr_div=10):
+    """Return predicted neural time course in the case when onsets are not equally spaced and do not start on a TR.
+    
+    Parameters:
+    ----------
+
+    cond_data : np.array
+        np.array of the condition
+    TR: float (default: 2)
+        TR in seconds
+    n_trs: int (default: 240)
+        number of TRs 
+    tr_div: int (default value is 10)
+        step per TR
+        (We want a resolution to the 10th between each TR)
+    
+
+    Return
+    -------
+    high_res_neural: np.array
+        predicted neural time course
+    """
+    onsets_seconds = cond_data[:, 0] # the time when a task starts
+    durations_seconds = cond_data[:, 1] # duration of a task
+    amplitudes = cond_data[:, 2] # amplitudes for each different task
+    onsets_in_scans = onsets_seconds / TR 
+    high_res_times = np.arange(0, n_trs, 1.0/tr_div) * TR
+    high_res_neural = np.zeros(high_res_times.shape)
+    high_res_onset_indices = onsets_in_scans * tr_div
+    high_res_durations = durations_seconds / TR * tr_div
+
+    for hr_onset, hr_duration, amplitude in list(zip(high_res_onset_indices,high_res_durations,amplitudes)):
+        hr_onset = int(round(hr_onset))
+        hr_duration = int(round(hr_duration))
+        high_res_neural[hr_onset:hr_onset+hr_duration] = amplitude
+    
+    return high_res_times, high_res_neural
+
+
+
+# def produce_neural_prediction(task_fname, tr, n_trs):
+
+#     neural_prediction = events2neural(task_fname, TR, n_vols)
+#     all_tr_times = np.arange(n_vols) * TR
+    
+#     return all_tr_times, neural_prediction
+
+
+
+
+
+# # Compile the design matrix
+# # First column is convolved regressor
+# # Second column all ones
+# design = np.ones((len(convolved), 2))
+
+# design[:, 0] = convolved
+
+# plt.imshow(design, aspect=0.1, interpolation='nearest', cmap='gray')
+
+
+# # Reshape the 4D data to voxel by time 2D
+# # Transpose to give time by voxel 2D
+# # Calculate the pseudoinverse of the design
+# # Apply to time by voxel array to get betas
+# data_2d = np.reshape(data1, (-1, data.shape[-1]))
+
+# betas = npl.pinv(design).dot(data_2d.T)
+
+
+# # Tranpose betas to give voxels by 2 array
+# # Reshape into 4D array, with same 3D shape as original data,
+# # last dimension length 2
+# betas_4d = np.reshape(betas.T, img.shape[:-1] + (-1,))
+
+
+# # Show the middle slice from the first beta volume
+# plt.imshow(betas_4d[:, :, 14, 0], interpolation='nearest', cmap='gray')
+
+
+# # Show the middle slice from the second beta volume
+# plt.imshow(betas_4d[:, :, 14, 1], interpolation='nearest', cmap='gray')
+
+
+
+
+
+
+
+
+# task = np.loadtxt('cond001.txt')
+
+# ons_durs = task[:, :2] / TR
+
+# for onset, duration in ons_durs:
+#     time_course[onset:onset + duration] = 1
+
+
+
+# ######################
+
+
+# n_trs = img.shape[-1]
+
+# TR = 2
+
+
+# time_course = events2neural('ds114_sub009_t2r1_cond.txt', TR, n_trs)
+
+
+
+# data = data[..., 4:]
+# time_course = time_course[4:]
+
+# n_voxels = np.prod(data.shape[:-1])
+
+
+# data_2d = np.reshape(data, (n_voxels, data.shape[-1]))
+
+# correlations_1d = np.zeros((n_voxels,))
+
+# # Loop over voxels filling in correlation at this voxel
+# for i in range(n_voxels):
+#     correlations_1d[i] = np.corrcoef(time_course, data_2d[i, :])[0, 1]
+
+# # Reshape the correlations array back to 3D
+# correlations = np.reshape(correlations_1d, data.shape[:-1])
+
