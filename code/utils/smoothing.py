@@ -1,5 +1,6 @@
 import numpy as np
-import itertools 
+import itertools
+import scipy
 from scipy.ndimage.filters import gaussian_filter
 
 def smoothing(data, sigma, time):

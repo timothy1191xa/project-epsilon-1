@@ -25,7 +25,7 @@ https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
 """
 
 
-def events2neural(task_fname, tr, n_trs):
+def events2neural(task, tr, n_trs):
     """ Return predicted neural time course from event file `task_fname`
 
     Parameters
@@ -42,8 +42,6 @@ def events2neural(task_fname, tr, n_trs):
         Predicted neural time course, one value per TR
 
     """
-    task = np.loadtxt(task_fname)
-    # Check that the file is plausibly a task file
     if task.ndim != 2 or task.shape[1] != 3:
         raise ValueError("Is {0} really a task file?", task_fname)
     # Convert onset, duration seconds to TRs
