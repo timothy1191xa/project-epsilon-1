@@ -1,13 +1,15 @@
+import sys
+sys.path.append(".././utils")
 import numpy as np
 from glm import *
+from convolution_normal_script import X_matrix
 import nibabel as nib
 import matplotlib.pyplot as plt
 
-run convolution_normal_script.py
 # run the convolution_normal_script.py script to get the design matrix X_matrix
 
 #get 4_d image data
-data_location = "../../data/ds005/sub002/BOLD/task001_run001/"
+data_location = "../../data/ds005/sub001/BOLD/task001_run001/"
 img = nib.load(data_location + "bold.nii")
 data = img.get_data()
 
