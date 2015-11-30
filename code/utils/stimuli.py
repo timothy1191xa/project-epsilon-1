@@ -52,7 +52,7 @@ def events2neural(task, tr, n_trs):
         time_course[onset:onset + duration] = amplitude
     return time_course
 
-def events2neural_high(cond_data, TR=2, n_trs=240, tr_div=10):
+def events2neural_high(cond_data, TR=2, n_trs=240, tr_div=100):
     """Return predicted neural time course in the case when onsets are not equally spaced and do not start on a TR.
     
     Parameters:
@@ -89,94 +89,4 @@ def events2neural_high(cond_data, TR=2, n_trs=240, tr_div=10):
         high_res_neural[hr_onset:hr_onset+hr_duration] = amplitude
     
     return high_res_times, high_res_neural
-
-
-
-# def produce_neural_prediction(task_fname, tr, n_trs):
-
-#     neural_prediction = events2neural(task_fname, TR, n_vols)
-#     all_tr_times = np.arange(n_vols) * TR
-    
-#     return all_tr_times, neural_prediction
-
-
-
-
-
-# # Compile the design matrix
-# # First column is convolved regressor
-# # Second column all ones
-# design = np.ones((len(convolved), 2))
-
-# design[:, 0] = convolved
-
-# plt.imshow(design, aspect=0.1, interpolation='nearest', cmap='gray')
-
-
-# # Reshape the 4D data to voxel by time 2D
-# # Transpose to give time by voxel 2D
-# # Calculate the pseudoinverse of the design
-# # Apply to time by voxel array to get betas
-# data_2d = np.reshape(data1, (-1, data.shape[-1]))
-
-# betas = npl.pinv(design).dot(data_2d.T)
-
-
-# # Tranpose betas to give voxels by 2 array
-# # Reshape into 4D array, with same 3D shape as original data,
-# # last dimension length 2
-# betas_4d = np.reshape(betas.T, img.shape[:-1] + (-1,))
-
-
-# # Show the middle slice from the first beta volume
-# plt.imshow(betas_4d[:, :, 14, 0], interpolation='nearest', cmap='gray')
-
-
-# # Show the middle slice from the second beta volume
-# plt.imshow(betas_4d[:, :, 14, 1], interpolation='nearest', cmap='gray')
-
-
-
-
-
-
-
-
-# task = np.loadtxt('cond001.txt')
-
-# ons_durs = task[:, :2] / TR
-
-# for onset, duration in ons_durs:
-#     time_course[onset:onset + duration] = 1
-
-
-
-# ######################
-
-
-# n_trs = img.shape[-1]
-
-# TR = 2
-
-
-# time_course = events2neural('ds114_sub009_t2r1_cond.txt', TR, n_trs)
-
-
-
-# data = data[..., 4:]
-# time_course = time_course[4:]
-
-# n_voxels = np.prod(data.shape[:-1])
-
-
-# data_2d = np.reshape(data, (n_voxels, data.shape[-1]))
-
-# correlations_1d = np.zeros((n_voxels,))
-
-# # Loop over voxels filling in correlation at this voxel
-# for i in range(n_voxels):
-#     correlations_1d[i] = np.corrcoef(time_course, data_2d[i, :])[0, 1]
-
-# # Reshape the correlations array back to 3D
-# correlations = np.reshape(correlations_1d, data.shape[:-1])
 
