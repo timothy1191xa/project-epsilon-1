@@ -1,3 +1,4 @@
+\section {Hypothesis testing}
 \subsection{Correlation}
 \noindent
 Before linear regression and hypothesis testing, we can look at the correlation between different conditions(task on/off, gain, loss, distance) vectors and voxel time courses. After calculating the 3-D correlation matrix, we can visualize the correlation heat map.  For visualization, we took the third dimension, height as slices. Thus we have 34 slices in total. Take subject 1  run 1 as an example.
@@ -27,14 +28,15 @@ From linear regression, we can get t-statistics for different conditions(task on
 
 \begin{figure}[H]
     \centering
-        \includegraphics[scale=0.5]{../plots/t_statistics_for_condition_2.png	}
+        \includegraphics[scale=0.5]{../plots/t_statistics_for_condition_2.png}	
+
     \caption{T Statistics for Gain}
 \end{figure}
 
 
 \begin{figure}[H]
     \centering
-        \includegraphics[scale=0.5]{../plots/t_statistics_for_condition_3.png	}
+        \includegraphics[scale=0.5]{../plots/t_statistics_for_condition_3.png}
     \caption{T Statistics for Loss}
 \end{figure}
 
@@ -47,4 +49,3 @@ The larger the t-statistics, the more significant. Thus the red spots represents
 
 \subsection{Findings and Next Steps}
 From the correlation and t statistics, we can locate and visualize the activated voxels responsible for gain or loss(other condition vectors). For subject 1 run 1, he/she has more activated voxels based on gain than loss. However, it will change across subject. Thus using affine, we can compare activated voxels across subject and run.
-\end {itemize}
