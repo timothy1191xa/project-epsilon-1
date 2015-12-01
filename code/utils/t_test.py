@@ -27,14 +27,14 @@ def t_test(data, X_matrix):
     p: p-values corresponding to the t-values and degrees of freedom
     """
 
-    beta = glm_multi(data[...,4:], X_matrix)
+    beta = glm_multi(data, X_matrix)
 
     # Calculate the parameters - b hat
     beta = np.reshape(beta, (-1, beta.shape[-1])).T
 
     fitted = X_matrix.dot(beta)
     # Residual error
-    y = np.reshape(data[...,4:], (-1, data[...,4:].shape[-1]))
+    y = np.reshape(data, (-1, data.shape[-1]))
     errors = y.T - fitted
     # Residual sum of squares
     RSS = (errors**2).sum(axis=0)
