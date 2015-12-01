@@ -99,7 +99,7 @@ np.savetxt(location_of_txt+'ds005_sub001_t1r1_conv4_high_res.txt', tr_hemo_dist)
 # create the matrix using np.convolve and plot them
 n_vols = data.shape[-1]
 X_matrix_high_res = np.ones((n_vols,5)) #design matrix (1 at the 0th column)
-condition = [tr_hemo_task[...,4:], tr_hemo_gain[...,4:], tr_hemo_loss[...,4:], tr_hemo_dist[...,4:]]
+condition = [tr_hemo_task, tr_hemo_gain, tr_hemo_loss, tr_hemo_dist]
 for i,name in enumerate(condition):
 	X_matrix_high_res[:,i+1] = condition[i]
 

@@ -1,21 +1,37 @@
-\subsection{BOLD data}
-For image data, we did several explanatory data analysis to better under the 
-BOLD data. 
+\subsection{Constructing hemodynamic response function}
+We can use the gamma function to construct a continuous function that is close to 
+the hemodynamic response we observe for different events in the brain. In our case,
+we have 4 different events (conditions): task = {0,1}, parametric gain, parametric loss, distance 
+from indifference. However, we cannot really convolve the canonical hemodynamic response function with the neural prediction from text files with condition information because:\\
+\\
+\par 1. The events are given at the different onsets in the experiment.\\
+\par 2. The hrf lasts for 30 seconds when the duration for each event is 3 seconds.\\
+\\
+Therefore, we tried the normal way to convolve the canonical hrf and the other way to convolve with hrf at the higher time resolution, and compared the resulting MRSS from the general linear regression analysis using the predictor from the normal convolution, and it from the other convolution.\\ 
+
+
 \begin{itemize}
-\item Reproduce Quality Assurance(QA) plots\\
- We reproduced some of the QA Plots provided in the BOLD folder, including 
- mean signals, Framewise Displacement and DVARS(root mean squared signal 
- derivative over brain mask). The shapes were almost the same, except the y 
- axis. We assumed there was some transformation or preprocessing in the 
- original QA plots.
-\item Correlation \\
- We calculated the correlation between task-on/task-off vectors and voxel time 
- courses to identify the active region of the brain. Below is an example of correlation figure of the middle slice in subject 1.\\
-  \begin{figure}[H]
+\item Convolve with the canonical hemodynamic response function:\\
+\par There are 4 condition files.\\
+\par - use the sum of two gamma distribution probability density functions\\
+\par - sample from the function, to get the estimates at the times of our TRs (2)\\
+\par - use this to convolve our neural (on-off) prediction\\
+\par We applied this method to all 4 condition files samely and built the design matrix for the linear regression analysis. \\
+
+
+\item Convolve with the high resolution neural time course:\\
+\par There are 4 condition files.\\
+\par - make a neural and hemodynamic regressor at a finer time resolution than the TRs\\
+\par - create a new neural prediction time-course where one element corresponds to 1 / 100 of a TR\\
+\par - sample at the TR onset times.
+\par - convolve the sampled HRF with the high resolution neural time course\\
+
+\begin{figure}[H]
     \centering
-        \includegraphics[scale=0.5]{correlations.png}
-    \caption{Correlation between On/Off and Voxel Time Course}
+        \includegraphics[scale=0.5]{MRSS.png}
+    \caption{MRSS comparison in first 3 subjects (1,2,3)}
 \end{figure}
-\item Associated the brain image data with behavior data\\
-We started to associate brain image data(mean/standard deviation across time courses) with gain/loss/ratio, choices(accept/reject) and respcat(strongly/weekly accept/reject).
+
+\\
+If we compare the MRSS from two linear regressions for three subjects (1,2,3) using convolution predictors from two different methods in this figure, we see the MRSS from linear regression using the latter method has slightly lower values compared to the former method. This makes sense because, using the latter method, we could more elaborately preprocess the data.
 \end {itemize}
