@@ -60,7 +60,7 @@ for i,name in enumerate(condition):
 	plt.title("Condition %s"%(condition_string[i]))
 	plt.savefig(location_of_plot+"convolved_%s.png"%(condition_string[i]))
 	plt.clf()
-	np.savetxt(location_of_txt+'ds005_sub001_t1r1_conv%s.txt'%(i), convolved)
+	np.savetxt(location_of_txt+'ds005_sub001_t1r1_conv%s.txt'%(i+1), convolved)
 	X_matrix[:,i+1] = convolved
 
 # Your X_matrix is ready

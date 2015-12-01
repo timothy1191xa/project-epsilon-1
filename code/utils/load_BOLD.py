@@ -31,6 +31,6 @@ def load_img(subject_number, run_number):
 	"""
 
 	img=nib.load(location_of_data+'sub00%s/BOLD/task001_run00%s/bold.nii' %(subject_number, run_number))
-	data=img.get_data()[...,4:]
+	data=img.get_data()
 	return data
 
