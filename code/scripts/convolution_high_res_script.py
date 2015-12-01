@@ -28,16 +28,23 @@ from load_BOLD import *
 
 
 location_of_data="../../data/ds005/"
-location_of_model="ds005/sub001/model/model001/onsets/task001_run001/" 
+location_of_model="ds005/sub002/model/model001/onsets/task001_run001/"
 location_of_plot="../../plots/"
 location_of_txt="../txt_files/"
 
 
 # Extract 4 conditions of subject 1's first run
+<<<<<<< HEAD
 task, gain, loss, dist = load_model_one(3,1)
 
 # load data (subject 1 run 1 for now) (you can change it if you want)
 data = load_img(3,1)
+=======
+task, gain, loss, dist = load_model_one(2,1)
+
+# load data (subject 1 run 1 for now) ( you can change it if you want)
+data = load_img(2,1)
+>>>>>>> d722bc9dddc177505a29e418d2d00c3ab33db388
 
 # Gain higher time resolutions
 high_res_times, high_task = events2neural_high(task)

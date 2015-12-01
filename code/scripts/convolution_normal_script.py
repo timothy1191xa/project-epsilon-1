@@ -26,7 +26,7 @@ from organize_behavior_data import *
 from load_BOLD import *
 
 location_of_data="../../data/ds005/"
-location_of_model="ds005/sub001/model/model001/onsets/task001_run001/" 
+location_of_model="ds005/sub00`/model/model001/onsets/task001_run001/"
 location_of_plot="../../plots/"
 location_of_txt="../txt_files/"
 
