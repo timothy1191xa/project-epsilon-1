@@ -20,12 +20,12 @@ def voxel_to_mm(voxel_fname, coordinate):
     ----------
     voxel_fname : str
         Filename of event file (use standard brain (mni))
-    coordinate : np.array
-    	Voxel coordinate
+    coordinate : list of tuples
+    	Voxel coordinates
 
     Returns
     -------
-    location_mm : np.array
+    location_mm : list
         location in millimeters
 
     """
@@ -34,7 +34,9 @@ def voxel_to_mm(voxel_fname, coordinate):
     #test image shape here
 
     vox_to_mm = img.affine
-    location_mm = nib.affines.apply_affine(vox_to_mm, coordinate)
+    location_mm = []
+    for i in coordinate:
+    	location_mm.append(nib.affines.apply_affine(vox_to_mm, i))
     return location_mm
 
 
@@ -50,11 +52,13 @@ def mm_to_voxels(voxel_fname, mm):
 
     Returns
     -------
-    voxel : np.array
+    voxel : list
     	voxel coordinate
 
     """
 	img = nib.load(voxel_fname)	
 	mm_to_vox = npl.inv(img.affine)
-	voxel = nib.affines.apply_affine(mm_to_vox, mm)
+	voxel = []
+	for i in mm:
+		voxel.append(nib.affines.apply_affine(mm_to_vox, mm))
 	return voxel
