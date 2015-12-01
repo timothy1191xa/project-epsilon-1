@@ -24,6 +24,8 @@ import nibabel as nib
 from stimuli import *
 from scipy.stats import gamma
 from organize_behavior_data import *
+from load_BOLD import *
+
 
 location_of_data="../../data/ds005/"
 location_of_model="ds005/sub001/model/model001/onsets/task001_run001/" 
@@ -34,6 +36,8 @@ location_of_txt="../txt_files/"
 # Extract 4 conditions of subject 1's first run
 task, gain, loss, dist = load_model_one(1,1)
 
+# load data (subject 1 run 1 for now) ( you can change it if you want)
+data = load_img(1,1)
 
 # Gain higher time resolutions
 high_res_times, high_task = events2neural_high(task)
@@ -90,3 +94,15 @@ np.savetxt(location_of_txt+'ds005_sub001_t1r1_conv1_high_res.txt', tr_hemo_task)
 np.savetxt(location_of_txt+'ds005_sub001_t1r1_conv2_high_res.txt', tr_hemo_gain)
 np.savetxt(location_of_txt+'ds005_sub001_t1r1_conv3_high_res.txt', tr_hemo_loss)
 np.savetxt(location_of_txt+'ds005_sub001_t1r1_conv4_high_res.txt', tr_hemo_dist)
+
+
+# create the matrix using np.convolve and plot them
+n_vols = data.shape[-1]
+X_matrix = np.ones((n_vols,5)) #design matrix (1 at the 0th column)
+condition = [tr_hemo_task[...,4:], tr_hemo_gain[...,4:], tr_hemo_loss[...,4:], tr_hemo_dist[...,4:]]
+for i,name in enumerate(condition):
+	X_matrix[:,i+1] = condition[i]
+
+
+
+
