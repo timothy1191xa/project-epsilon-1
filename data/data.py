@@ -19,7 +19,7 @@ def generate_file_md5(filename, blocksize=2**20):
     f= open(filename)
     while True:
         buf = f.read(blocksize)
-        codecs.encode(buf,'ISO-8859-1')
+        #codecs.encode(buf,'ISO-8859-1')
         if not buf:
             break
         m.update(buf)

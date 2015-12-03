@@ -59,6 +59,7 @@ doc/source/_static/test.png
 #data
 data/ds005
 data/ds005_raw_checksums.txt
-
+data/ds005_mnifunc.tar
+data/ds005_2
 \#*
 *~
