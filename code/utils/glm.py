@@ -1,7 +1,7 @@
 import numpy as np
 import numpy.linalg as npl
 
-def glm_multi(data_4d, X):
+def glm_beta(data_4d, X):
     """
     Return a tuple of the estimated coefficients in 4 dimensions and 
     the design matrix. 
@@ -28,7 +28,7 @@ def glm_multi(data_4d, X):
     B_4d = np.reshape(B.T, data_4d.shape[:-1] + (-1,))
     return B_4d
 
-def glm_diagnostics(B_4d, design, data_4d):
+def glm_mrss(B_4d, design, data_4d):
     """
     Return a tuple of the MRSS in 3 dimensions, fitted values in 4 
     dimensions, and residuals in 4 dimensions. 
