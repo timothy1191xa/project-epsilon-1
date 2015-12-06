@@ -12,8 +12,6 @@ from scipy.stats import t
 import numpy.linalg as npl
 import math
 
-%matplotlib
-
 
 
 
@@ -167,7 +165,7 @@ def linear_regression(data, y, *arg):
 		print(arg[i-1])
 		print 'Coefficient: ' + str(beta[i]), 'p-value: ' + str(pvalues[i])
 
-	return
+	return beta, pvalues
 
 """
 def linear_regression_RT_with_gain_and_loss(data):

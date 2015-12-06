@@ -8,8 +8,8 @@ from linear_regression import *
 data = combine_all_data()
 
 # Run the linear_regression function to get the summary
-linear_regression(data, 'RT', 'gain', 'loss')
+beta_gain_and_loss, p_gain_and_loss = linear_regression(data, 'RT', 'gain', 'loss')
 
-linear_regression(data, 'RT', 'ratio')
+beta_ratio, p_ratio = linear_regression(data, 'RT', 'ratio')
 
-linear_regression(data, 'RT', 'diff')
+beta_diff, p_diff = linear_regression(data, 'RT', 'diff')
