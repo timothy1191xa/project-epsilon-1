@@ -2,7 +2,9 @@ from __future__ import print_function, division
 
 import hashlib
 import os
-import codecs
+import pdb
+
+
 
 def create_dict(filename):
     newDict={}
@@ -19,7 +21,8 @@ def generate_file_md5(filename, blocksize=2**20):
     f= open(filename)
     while True:
         buf = f.read(blocksize)
-        #codecs.encode(buf,'ISO-8859-1')
+        #pdb.set_trace()
+        buf.decode('latin-1').encode('utf-8')
         if not buf:
             break
         m.update(buf)
