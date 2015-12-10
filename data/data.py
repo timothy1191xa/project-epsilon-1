@@ -1,4 +1,4 @@
-"""manage_hashes.py
+"""data.py
 
 A collection of functions manages hases to data download.
 See test_* functions in this directory for the nose tests.  
@@ -8,6 +8,8 @@ from __future__ import print_function, division
 import hashlib
 import os
 import pdb
+
+#TODO: rename the file data_hashes.py
 
 def create_dict(filename):
     """Return a dictionary of hashes from a .txt file
