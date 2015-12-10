@@ -1,3 +1,5 @@
+.PHONY: test coverage
+
 test:
 	nosetests utils/tests -w ..
 
