@@ -9,6 +9,7 @@ download_filtered_data:
 
 validate_data:
 	wget http://openfmri.s3.amazonaws.com/tarballs/ds005_raw_checksums.txt
+	python get_ds005_hashes_from_txt.py
 	python data.py
  	
 download_test_data:
