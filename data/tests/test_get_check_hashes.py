@@ -22,14 +22,7 @@ def test_check_hashes():
         assert check_hashes(d)
         d = {fname: "4b82f8bf4df2bfb0e66ccaa7306fd024"}
         assert not check_hashes(d)
-    #TODO: uncomment ds005 ?
-    file_ls = ['../ds005_filtered_hashes.json',\
-              # '../ds005_hashes.json',\
-               '../ds114_hashes.json']
-    for f in file_ls:
-        with open(f) as infile:
-            f_dict = json.load(infile)
-            assert check_hashes(f_dict)    
+
 
 def test_get_hashes():
     #Download json file senators-list.json and store it in the current directory
@@ -37,9 +30,9 @@ def test_get_hashes():
     urllib.urlretrieve(link, 'senators-list.json')
     dir_hashes = generate_dir_md5('.')
     #Verify the hash for senators-list.json and remove the file
-    assert not dir_hashes['./senators-list.json'] == \
+    assert not dir_hashes['senators-list.json'] == \
               'f0c1a76b571ab86968329a7b202f2edf'
-    assert dir_hashes['./senators-list.json'] == \
+    assert dir_hashes['senators-list.json'] == \
               'd96aaf10750b3f44303dd055d7868b2d'
     os.remove('senators-list.json')
 
