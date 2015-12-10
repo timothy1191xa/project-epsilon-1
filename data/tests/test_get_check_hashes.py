@@ -2,16 +2,17 @@
 Run with:
     nosetests test_get_check_hashes.py
 """
-
 from __future__ import print_function
-
+from future import standard_library
+standard_library.install_aliases()
 import sys, os, pdb
 import tempfile
-import urllib
 import json
 #Specicy the path for functions
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
 from data_hashes import *
+
+import urllib.request
 
 def test_check_hashes():
     with tempfile.NamedTemporaryFile() as temp:
@@ -26,10 +27,12 @@ def test_check_hashes():
 
 def test_get_hashes():
     #Download json file senators-list.json and store it in the current directory
-    link = 'http://jarrodmillman.com/rcsds/data/senators-list.json'
-    urllib.urlretrieve(link, 'senators-list.json')
+    url = 'http://jarrodmillman.com/rcsds/data/senators-list.json'
+    with urllib.request.urlopen(url) as in_file,\
+        open('senators-list.json', 'wb') as out_file:
+        data = in_file.read() # a `bytes` object
+        out_file.write(data)
     dir_hashes = generate_dir_md5('.')
-    print(dir_hashes)
     #Verify the hash for senators-list.json and remove the file
     assert not dir_hashes['./senators-list.json'] == \
               'f0c1a76b571ab86968329a7b202f2edf'
