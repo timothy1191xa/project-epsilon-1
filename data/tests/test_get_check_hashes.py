@@ -4,11 +4,13 @@ Run with:
 """
 
 from __future__ import print_function
-from .. import data 
 
 import tempfile
 import urllib
 import json
+#Specicy the path for functions
+sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
+from data_hashes import *
 
 def test_check_hashes():
     with tempfile.NamedTemporaryFile() as temp:
@@ -16,25 +18,23 @@ def test_check_hashes():
         temp.flush()
         fname = temp.name
         d = {fname: "5b82f8bf4df2bfb0e66ccaa7306fd024"}
-        assert data.check_hashes(d)
+        assert check_hashes(d)
         d = {fname: "4b82f8bf4df2bfb0e66ccaa7306fd024"}
-        assert not data.check_hashes(d)
+        assert not check_hashes(d)
     #TODO: uncomment ds005 ?
-    file_ls = ['ds005_filtered_hashes.json',\
-              # 'ds005_hashes.json',\
-               'ds114_hashes.json']
+    file_ls = ['../ds005_filtered_hashes.json',\
+              # '../ds005_hashes.json',\
+               '../ds114_hashes.json']
     for f in file_ls:
         with open(f) as infile:
             f_dict = json.load(infile)
-            assert data.check_hashes(f_dict)    
-
-
+            assert check_hashes(f_dict)    
 
 def test_get_hashes():
     #Download json file senators-list.json and store it in the current directory
     link = 'http://jarrodmillman.com/rcsds/data/senators-list.json'
     urllib.urlretrieve(link, 'senators-list.json')
-    dir_hashes = data.generate_dir_md5('.')
+    dir_hashes = generate_dir_md5('.')
     #Verify the hash for senators-list.json and remove the file
     assert not dir_hashes['./senators-list.json'] == \
               'f0c1a76b571ab86968329a7b202f2edf'
