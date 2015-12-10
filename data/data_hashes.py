@@ -46,7 +46,7 @@ def generate_file_md5(filename, blocksize=2**20):
     f = open(filename)
     while True:
         buf = f.read(blocksize)
-        buf.decode('latin-1').encode('utf-8')
+#        buf.decode('latin-1').encode('utf-8')
         if not buf:
             break
         m.update(buf)
