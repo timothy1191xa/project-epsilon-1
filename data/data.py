@@ -65,7 +65,8 @@ def generate_dir_md5(dirname):
     dir_hash = {}
     for root, dirs, files in os.walk(dirname):
         for f in files:
-           file_p = os.path.join(root, f)			                dir_hash[file_p] = generate_file_md5(file_p)
+           file_p = os.path.join(root, f)
+	   dir_hash[file_p] = generate_file_md5(file_p)
     return dir_hash
 
 
