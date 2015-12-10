@@ -1,9 +1,13 @@
-from __future__ import absolute_import, division, print_function
+""" Tests for checking the hashes for downloaded data
+Run with:
+    nosetests test_data.py
+"""
+
+
+from __future__ import print_function
+from .. import data 
 
 import tempfile
-
-from .. import data
-
 
 def test_check_hashes():
     with tempfile.NamedTemporaryFile() as temp:
