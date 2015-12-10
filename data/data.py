@@ -95,6 +95,7 @@ def check_hashes(newDict):
     return all_good
 
 if __name__=="__main__":
-    newDict = create_dict('ds005_raw_checksums.txt')
-    print(check_hashes(newDict))
-    print(generate_dir_md5('ds107'))
+#TODO: uncomment this fo the final
+#    newDict = create_dict('ds005_raw_checksums.txt')
+#    check_hashes(newDict)
+    check_hashes(generate_dir_md5('ds005_filtered')) 
