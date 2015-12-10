@@ -8,6 +8,7 @@ from __future__ import print_function, division
 import hashlib
 import os
 import pdb
+import json
 
 #TODO: rename the file data_hashes.py
 
@@ -95,7 +96,11 @@ def check_hashes(newDict):
     return all_good
 
 if __name__=="__main__":
-#TODO: uncomment this fo the final
-#    newDict = create_dict('ds005_raw_checksums.txt')
-#    check_hashes(newDict)
-    check_hashes(generate_dir_md5('ds005_filtered')) 
+#TODO: add the folder ds005 here
+    file_ls = ['ds005_filtered_hashes.json',\
+              # 'ds005_hashes.json',\
+               'ds114_hashes.json']
+    for f in file_ls:
+        with open(f) as infile:
+            f_dict = json.load(infile)
+            check_hashes(f_dict)
