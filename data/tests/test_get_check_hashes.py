@@ -29,11 +29,11 @@ def test_get_hashes():
     link = 'http://jarrodmillman.com/rcsds/data/senators-list.json'
     urllib.urlretrieve(link, 'senators-list.json')
     dir_hashes = generate_dir_md5('.')
+    print(dir_hashes)
     #Verify the hash for senators-list.json and remove the file
-    assert not dir_hashes['senators-list.json'] == \
+    assert not dir_hashes['./senators-list.json'] == \
               'f0c1a76b571ab86968329a7b202f2edf'
-    assert dir_hashes['senators-list.json'] == \
+    assert dir_hashes['./senators-list.json'] == \
               'd96aaf10750b3f44303dd055d7868b2d'
     os.remove('senators-list.json')
-
 
