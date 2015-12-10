@@ -5,3 +5,4 @@ matplotlib==1.4.3
 pandas==0.16.2
 statsmodels==0.6.1
 nibabel==2.0.1
+future=0.15.2
