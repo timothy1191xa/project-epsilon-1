@@ -43,14 +43,14 @@ def generate_file_md5(filename, blocksize=2**20):
         generated for filename
     """
     m = hashlib.md5()
-    f = open(filename)
-    while True:
-        buf = f.read(blocksize)
-#        buf.decode('latin-1').encode('utf-8')
-        if not buf:
-            break
-        m.update(buf)
-    f.close()
+    with open(filename, "rb") as f:
+        while True:
+            buf = f.read(blocksize)
+#            buf.decode('latin-1').encode('utf-8')
+            if not buf:
+                break
+            m.update(buf)
+#        f.close()
     return m.hexdigest()
 
 def generate_dir_md5(dirname):
