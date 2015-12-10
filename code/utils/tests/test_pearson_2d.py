@@ -14,7 +14,7 @@ import numpy as np
 import sys, os, pdb
 
 #Specify the path for functions
-sys.path.append("../functions/")
+sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 import pearson
 
 def test_pearson_2d():
