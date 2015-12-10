@@ -1,6 +1,6 @@
 """ Tests for checking the hashes for downloaded data
 Run with:
-    nosetests test_data.py
+    nosetests test_get_check_hashes.py
 """
 
 from __future__ import print_function
@@ -8,6 +8,7 @@ from .. import data
 
 import tempfile
 import urllib
+import json
 
 def test_check_hashes():
     with tempfile.NamedTemporaryFile() as temp:
@@ -18,6 +19,16 @@ def test_check_hashes():
         assert data.check_hashes(d)
         d = {fname: "4b82f8bf4df2bfb0e66ccaa7306fd024"}
         assert not data.check_hashes(d)
+    #TODO: uncomment ds005 ?
+    file_ls = ['ds005_filtered_hashes.json',\
+              # 'ds005_hashes.json',\
+               'ds114_hashes.json']
+    for f in file_ls:
+        with open(f) as infile:
+            f_dict = json.load(infile)
+            assert data.check_hashes(f_dict)    
+
+
 
 def test_get_hashes():
     #Download json file senators-list.json and store it in the current directory
@@ -30,3 +41,5 @@ def test_get_hashes():
     assert dir_hashes['./senators-list.json'] == \
               'd96aaf10750b3f44303dd055d7868b2d'
     os.remove('senators-list.json')
+
+
