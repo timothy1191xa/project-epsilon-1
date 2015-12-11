@@ -17,12 +17,6 @@ from numpy.testing import assert_almost_equal, assert_array_equal
 # Add path to functions to the system path.
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
-project_path = '../../../'
-conv_path = project_path + 'txt_output/conv_normal/'
-
-
-# Add path to functions to the system path.
-sys.path.append("../")
 
 # Load our GLM functions. 
 from glm import glm_beta, glm_mrss
