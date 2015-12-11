@@ -24,7 +24,7 @@ from smoothing import smoothing
 
 def test_smooth():
     # Read in the image data.
-    img = nib.load(project_path +'data/ds005/sub011/BOLD/task001_run003/bold.nii')
+    img = nib.load(project_path +'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
     data = img.get_data()
 
     # Run the smoothing function with sigma 0 at time 12
