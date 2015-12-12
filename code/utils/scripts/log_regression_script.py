@@ -70,6 +70,10 @@ for i,subject in enumerate(subject_list):
 	ax.tick_params(axis='x')
 	ax.tick_params(axis='y')
 	
+fig.legend((l1,l2), ('Gamble','Not Gamble'), loc = 'lower right', labelspacing = 0.5, fontsize = 10)
+fig.suptitle("Fitted Logistic Regression Line (1(gamble) 0(not gamble) with gain and loss values\n", fontsize=12)
+fig.savefig(dirs[1]+'/log_regression_behav_subplots.png',facecolor='white', edgecolor='white')
+
 
 
 
