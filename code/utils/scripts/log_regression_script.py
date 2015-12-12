@@ -52,7 +52,6 @@ for i,subject in enumerate(subject_list):
 		#fig = plt.figure(figsize = (10, 8))   
 	ax = fig.add_subplot(4, 4, i+1) 
 	ax.set_title("Subject_%s_run001"%(str(i+1)), fontsize =10)
-	ax.set_axis_bgcolor('white')
 
 	# plot gain and loss for respcat = 1(decides to gamble)
 	l1 = ax.plot(behav_df[behav_df['respcat'] == 1].values[:,2], behav_df[behav_df['respcat'] == 1].values[:,1], '.', label = "Gamble", mfc = 'None', mec='red')
@@ -71,9 +70,7 @@ for i,subject in enumerate(subject_list):
 	ax.tick_params(axis='y')
 	
 fig.legend((l1,l2), ('Gamble','Not Gamble'), loc = 'lower right', labelspacing = 0.5, fontsize = 10)
-fig.suptitle("Fitted Logistic Regression Line (1(gamble) 0(not gamble) with gain and loss values\n", fontsize=12)
 fig.savefig(dirs[1]+'/log_regression_behav_subplots.png',facecolor='white', edgecolor='white')
-
 
 
 
