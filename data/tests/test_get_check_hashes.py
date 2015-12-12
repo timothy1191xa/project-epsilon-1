@@ -2,15 +2,15 @@
 Run with:
     nosetests test_get_check_hashes.py
 """
-from __future__ import print_function
+from __future__ import ( division, absolute_import, print_function, unicode_literals )
 import sys, os, pdb
 import tempfile
 import json
 
-try:
-    from urllib.request import urlopen
-except ImportError:
-    from urllib2 import urlopen
+if sys.version_info >= (3,):
+    import urllib.request as urllib2
+else:
+    import urllib2
 
 #Specicy the path for functions
 sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
@@ -30,7 +30,7 @@ def test_check_hashes():
 def test_get_hashes():
     #Download json file senators-list.json and store it in the current directory
     url = 'http://jarrodmillman.com/rcsds/data/senators-list.json'
-    in_file = urlopen(url)
+    in_file = urllib2.urlopen(url)
     out_file = open('senators-list.json', 'wb')
     out_file.write(in_file.read())
     out_file.close() 
