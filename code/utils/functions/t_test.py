@@ -1,9 +1,14 @@
+"""
+"""
+
+import sys, os, pdb
 import numpy as np
-from glm import *
 import numpy.linalg as npl
 from scipy.stats import t as t_dist
+sys.path.append(os.path.join(os.path.dirname(__file__), "./"))
+from glm import *
 
-def t_test(data, X_matrix):
+def t_stat(data, X_matrix):
     """
     Return the estimated betas, t-values, degrees of freedom, and p-values for the glm_multi regression
     
