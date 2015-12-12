@@ -20,7 +20,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
 # Load smoothing function.
 from smoothing import smoothing
-project_path = os.path.dirname(__file__) + '../../../'
+project_path = os.path.join(os.path.dirname(__file__), '../../../')
 
 def test_smooth():
     # Read in the image data.

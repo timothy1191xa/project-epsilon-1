@@ -20,7 +20,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
 # Load our GLM functions. 
 from glm import glm_beta, glm_mrss
-project_path=os.path.dirname(__file__) + '../../../'
+project_path=os.path.join(os.path.dirname(__file__), '../../../')
 
 def test_glm_beta():
     # Read in the image data.
