@@ -11,27 +11,6 @@ import os
 import pdb
 import json
 
-def create_dict(filename):
-    """Return a dictionary of hashes from a .txt file
-
-       Parameters
-       ----------
-       filename: .txt file containing the each file hash in the
-           first column and the file location in the data in the
-            second column.
-       Returns
-       ---------
-       newDict: a dictionary of hashes
-    """
-    newDict={}
-    f=open(filename)
-    num_lines = sum(1 for line in open(filename))
-    for line,i in zip(f,range(0,num_lines)):
-        info = line.split()
-        newDict[info[1]]=info[0]
-    f.close()
-    return newDict
-
 def generate_file_md5(filename, blocksize=2**20):
     """Generate the md5 hash for filename
     Parameters
