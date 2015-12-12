@@ -20,9 +20,19 @@ import sys
 
 
 def add_gainlossratio(run):
+	""" Return the behavioral data of a subject with added 'ratio' column
+ 
+    Parameters
+    ----------
+    run : data.frame
+        Behavior data over 3 runs (combined) of a subject
+    
+    Returns
+    -------
+    run : data.frame
+        behavioral data added the ratio column (ratio : gain/loss)
 
-	""" add gain/loss ratio column """
-
+    """
 	gain = run.ix[:,1]
 	loss = run.ix[:,2]
 	run['ratio'] = gain/loss
@@ -30,14 +40,19 @@ def add_gainlossratio(run):
 	return run
 
 def organize_columns(run):
+	""" move around the columns to get the data frame be ready for logistic regression
+ 
+    Parameters
+    ----------
+    run : data.frame
+        behavioral data added the ratio column (ratio : gain/loss)
 
-	"""
+    Returns
+    -------
+    run_final : data.frame
+        behavioral data frame with organized columns
 
-	drop the unnecessary columns in the data frame,
-	and reorganize the columns for logistic regression
-
-	
-	"""
+    """
 
 	# drop onset column
 	a = run.drop('onset', 1) 
@@ -64,8 +79,19 @@ def organize_columns(run):
 
 def log_regression(run_final):
 
-	"""do logistic regression on train cols to predict the subject's decision"""
+	"""Do logistic regression on train cols to predict the subject's decision
 	
+	Parameters
+    ----------
+    run : data.frame
+        behavioral data frame with organized columns
+
+    Returns
+    -------
+    logit_pars : logistic regression result summary
+        the logistic regression result summary
+
+    """
 	# do logistic regression
 	x = logit("respcat ~ gain + loss", run_final).fit()
 
