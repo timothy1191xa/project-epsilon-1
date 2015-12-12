@@ -1,7 +1,9 @@
 """
 Purpose:
 -----------------------------------------------------------------------------------
-We make the extraction of txt file to be easier by building these functions. 
+To explore the behavior data for each subject, we make it convenient by building these
+functions. Especially, logistic regression on behavior data needs the data in pandas.
+data_frame. This does it for you
 -----------------------------------------------------------------------------------
 """
 
