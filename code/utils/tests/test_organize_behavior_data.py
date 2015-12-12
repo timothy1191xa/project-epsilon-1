@@ -20,9 +20,29 @@ from organize_behavior_data import *
 project_location="../../../"
 data_location=project_location+"data/ds005/"
 
+
+
+def test_load_in_dataframe():
+	""" tests whether the behavior data is loadede in data frame. 
+
+	Testing on subject 2.
+	"""
+	run1 = pd.read_table(data_location+'sub002/behav/task001_run001/behavdata.txt')
+	run2 = pd.read_table(data_location+'sub002/behav/task001_run001/behavdata.txt')
+	run3 = pd.read_table(data_location+'sub002/behav/task001_run001/behavdata.txt')
+
+	#append all the runs in one pandas data frame
+	r=run1.append(run2)
+	run_total=r.append(run3)
+	run_total_array=run_total.as_matrix()
+	test_array=load_in_dataframe(2).as_matrix()
+	assert_array_equal(run_total_array, test_array)
+
+
+
 def test_load_behav_txt():
 	""" tests whether the function is properly taking out the errors in the subject's 
-	responses. 
+	responses. (COMBINED RUNS)
 
 	Testing on subject 2.
 	"""
@@ -36,13 +56,24 @@ def test_load_behav_txt():
 	#check if the shape is same
 	assert_equal(load_behav_txt(2).shape,fixedshape)
 	#check if there is any error is not taken out yet
-	assert_equal(np.where(behav[:,5]==-1),np.array([]).reshape(1,0))
+	assert_equal(np.where(load_behav_txt(2)[:,5]==-1),np.array([]).reshape(1,0))
 
 
 def test_load_behav_text_one():
+	""" tests whether the function is properly taking out the errors in the subject's 
+	responses. (SINGLE RUN)
+
+	Testing on subject 2 run001.
+	"""
+	fixedshape = (84,7)
+	behav1=np.loadtxt(data_location+'sub002/behav/task001_run001/behavdata.txt',skiprows=1)
+
+	#check if the shape is same
+	assert_equal(load_behav_text_one(2,1).shape,fixedshape)
+	#check if there is any error is not taken out yet
+	assert_equal(np.where(load_behav_text_one(2,1)[:,5]==-1),np.array([]).reshape(1,0))
 
 
 
 
-def test_load_in_dataframe():
 
