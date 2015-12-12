@@ -20,10 +20,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
 # Load smoothing function.
 from smoothing import smoothing
+project_path = '../../../'
 
 def test_smooth():
     # Read in the image data.
-    img = nib.load('data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
+    img = nib.load(project_path + \
+          'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
     data = img.get_data()
 
     # Run the smoothing function with sigma 0 at time 12

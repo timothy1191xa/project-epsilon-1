@@ -20,14 +20,17 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
 # Load our GLM functions. 
 from glm import glm_beta, glm_mrss
+project_path='../../../'
 
 def test_glm_beta():
     # Read in the image data.
-    img = nib.load('data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
+    img = nib.load(project_path + \
+          'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
     data = img.get_data()
     # Read in the convolutions.
     p = 2
-    convolved1 = np.loadtxt('data/ds114/sub009/behav/task002_run001/ds114_sub009_t2r1_conv.txt')
+    convolved1 = np.loadtxt(project_path + \
+                 'data/ds114/sub009/behav/task002_run001/ds114_sub009_t2r1_conv.txt')
     # Create design matrix. 
     X_matrix = np.ones((len(convolved1), p))
     X_matrix[:, 1] = convolved1
@@ -43,9 +46,11 @@ def test_glm_beta():
 
 
 def test_glm_mrss():
-    img = nib.load('data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
+    img = nib.load(project_path + \
+          'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
     data = img.get_data()
-    convolved1 = np.loadtxt('data/ds114/sub009/behav/task002_run001/ds114_sub009_t2r1_conv.txt')
+    convolved1 = np.loadtxt(project_path + \
+                 'data/ds114/sub009/behav/task002_run001/ds114_sub009_t2r1_conv.txt')
     X_matrix = np.ones((len(convolved1), 2))
     X_matrix[:, 1] = convolved1
     data_2d = np.reshape(data, (-1, data.shape[-1]))
