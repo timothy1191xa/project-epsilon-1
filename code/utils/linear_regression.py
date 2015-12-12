@@ -295,10 +295,6 @@ def beta_statistics():
 	for i in range(len(data)):
 		lambdas.append( math.log(betas[i][2] / betas[i][1])    )
 
-
-
-
-
 	return
 
 
