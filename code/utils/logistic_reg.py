@@ -6,6 +6,7 @@ We fit the logistic regression line based on their responses on the experiment. 
 of the fitted line illustrates the subject's sensitivity on either gain or loss amount. 
 -----------------------------------------------------------------------------------
 """
+
 import pandas as pd
 import statsmodels.api as sm
 import pylab as pl
@@ -33,6 +34,7 @@ def add_gainlossratio(run):
         behavioral data added the ratio column (ratio : gain/loss)
 
     """
+
 	gain = run.ix[:,1]
 	loss = run.ix[:,2]
 	run['ratio'] = gain/loss
@@ -53,6 +55,7 @@ def organize_columns(run):
         behavioral data frame with organized columns
 
     """
+
 
 	# drop onset column
 	a = run.drop('onset', 1) 
@@ -78,7 +81,6 @@ def organize_columns(run):
 
 
 def log_regression(run_final):
-
 	"""Do logistic regression on train cols to predict the subject's decision
 	
 	Parameters
@@ -101,30 +103,7 @@ def log_regression(run_final):
 	#store the parameters of logistic regression
 	logit_pars = x.params
 
-	### START TO PLOT ###
-	# calculate intercept and slope
-	intercept = -logit_pars['Intercept'] / logit_pars['gain']
-	slope = -logit_pars['loss'] / logit_pars['gain']
-
-	fig = plt.figure(figsize = (10, 8))   
-
-	# plot gain and loss for respcat = 1(decides to gamble)
-	plt.plot(run_final[run_final['respcat'] == 1].values[:,2], run_final[run_final['respcat'] == 1].values[:,1], '.', label = "Gamble", mfc = 'None', mec='red')
-
-	# plot gain and loss for respcat = 0(decides to not gamble)
-	plt.plot(run_final[run_final['respcat'] == 0].values[:,2], run_final[run_final['respcat'] == 0].values[:,1], '.', label = "Not gamble", mfc = 'None', mec='blue')
-
-	# draw regression line
-	plt.plot(run_final['loss'], intercept + slope * run_final['loss'],'-', color = 'green') 
-
-	plt.xlabel('Loss ($)')
-	plt.ylabel('Gain ($)')
-	plt.legend(loc='bottom right')
-	plt.axis([2, 23, 8, 41])
-	plt.title("Logistic Regression to predict 1(gamble) 0(not gamble) with gain and loss values\n")
-	plt.savefig('log_regression.png')
-	plt.show()
-	return 
+	return logit_pars
 
 if __name__ == '__main__':
     a=add_gainlossratio(int(sys.argv[1]))
