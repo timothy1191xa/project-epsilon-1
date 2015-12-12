@@ -106,6 +106,23 @@ def combine_all_data(data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 	return (all_data)
 
 
+
+
+def load_each_subject(data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
+
+	l = []
+
+	for i in all_subjects:
+		l.append(load_data(i, data_dir))
+
+
+	for i in range(len(all_subjects)):
+		l[i]['ratio'] = l[i]['gain'] / l[i]['loss']
+
+	return l
+
+
+
 """
 To combine all the behavioral data
 
@@ -165,7 +182,7 @@ def linear_regression(data, y, *arg):
 		print(arg[i-1])
 		print 'Coefficient: ' + str(beta[i]), 'p-value: ' + str(pvalues[i])
 
-	return
+	return beta, pvalues
 
 """
 def linear_regression_RT_with_gain_and_loss(data):
@@ -228,9 +245,61 @@ def linear_regression_fast(data, formula):
 
 	return est
 
+# My prediction for Response Time given ratio (gain/loss)
+def my_line(x, beta = B):
+    	return beta[0] + beta[1] * x
 
 
 
+def simple_regression_plot(data, dep_var, exp_var):
+
+	y = data[dep_var]
+	x = data[exp_var]
+
+	n = len(data)
+
+	# Design X matrix
+	X = np.column_stack((np.ones(n), x))
+
+	# Get the beta
+	B = npl.pinv(X).dot(y)
+	
+	# Get the regression line
+    x_vals = [0, max(x)]
+	y_vals = [my_line(0), my_line(max(x))]
+	
+	# Plot the simple linear regression
+    plt.plot(x, y, '+')
+	plt.xlabel('ratio (gain/loss)')
+	plt.ylabel('Response Time')
+	plt.plot(x_vals, y_vals)
+	plt.title('Ratio vs Response Time with predicted line')
+	
+	return
+
+
+
+def beta_statistics():
+
+	data = load_each_subject()
+
+	betas = [0] * len(data)
+	pvalues = [0] * len(data)
+
+	for i in range(len(data)):
+		betas[i], pvalues[i] = linear_regression(data[i], 'RT', 'gain', 'loss')
+
+
+	lambdas = []
+
+	for i in range(len(data)):
+		lambdas.append( math.log(betas[i][2] / betas[i][1])    )
+
+
+
+
+
+	return
 
 
 
