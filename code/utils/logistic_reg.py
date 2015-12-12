@@ -5,6 +5,7 @@ import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 from statsmodels.formula.api import logit, ols
+import numpy.linalg as npl
 import sys
 
 #PREDICT SUBJECT's DECISION TO WHETHER GAMBLE OR NOT GIVEN WITH GAIN AND LOSS AMOUNT using LOGISTIC REGRESSION
@@ -91,6 +92,54 @@ def log_regression(run_final):
 	plt.savefig('log_regression.png')
 	plt.show()
 	return 
+
+
+def plot_neural_and_behav_loss_aversion(data, subject):
+
+	all_subjects = ['001', '002', '003', '004', '005', '006', '007', 
+	'008', '009', '010', '011', '012', '013', '014', '015', '016']
+
+	lambdas = []
+	loss_aversion = []
+
+	for i in range(len(all_subjects)):
+
+		a = add_gainlossratio(data[i])
+		b = organize_columns(a)
+		x = logit("respcat ~ gain + loss", b).fit()
+		logit_pars = x.params
+		ratio =  -logit_pars['loss'] / logit_pars['gain'] 
+		lambdas.append( math.log(ratio) )
+		loss_aversion.append( (-logit_pars['loss']) - logit_pars['gain'] )
+
+	X = np.column_stack((np.ones(16), loss_aversion))
+
+
+	
+	B = npl.pinv(X).dot(lambdas)
+
+	def my_line(x):
+    	# Best prediction 
+    	return B[0] + B[1] * x
+
+   	x_vals = [0, max(loss_aversion)]
+	y_vals = [my_line(0), my_line(max(loss_aversion))]
+
+	plt.plot(loss_aversion, lambdas, '+')
+	plt.plot(x_vals, y_vals)
+
+	plt.xlabel('negative loss beta - gain beta')
+	plt.ylabel('log of lambda')
+
+	plt.show()
+
+
+	return
+
+
+
+
+
 
 if __name__ == '__main__':
     a=add_gainlossratio(int(sys.argv[1]))
