@@ -18,9 +18,9 @@ download_test_data:
 	wget -P ../data/ds114/sub009/behav/task002_run001/ http://www.jarrodmillman.com/rcsds/_downloads/ds114_sub009_t2r1_conv.txt
 
 test: 
-	 nosetests tests -w ..
+	 nosetests tests 
 
 coverage:
-	 nosetests tests -w .. --with-coverage --cover-package=data.py 
+	 nosetests tests --with-coverage --cover-package=data_hashes.py 
 
 
