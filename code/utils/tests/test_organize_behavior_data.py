@@ -13,7 +13,7 @@ import numpy.linalg as npl
 import nibabel as nib
 import pandas as pd
 import os, sys
-from numpy.testing import assert_almost_equal, assert_array_equal, assert_equal, 
+from numpy.testing import assert_almost_equal, assert_array_equal, assert_equal 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 from organize_behavior_data import *
 
@@ -28,8 +28,8 @@ def test_load_in_dataframe():
 	Testing on subject 2.
 	"""
 	run1 = pd.read_table(data_location+'sub002/behav/task001_run001/behavdata.txt')
-	run2 = pd.read_table(data_location+'sub002/behav/task001_run001/behavdata.txt')
-	run3 = pd.read_table(data_location+'sub002/behav/task001_run001/behavdata.txt')
+	run2 = pd.read_table(data_location+'sub002/behav/task001_run002/behavdata.txt')
+	run3 = pd.read_table(data_location+'sub002/behav/task001_run003/behavdata.txt')
 
 	#append all the runs in one pandas data frame
 	r=run1.append(run2)
