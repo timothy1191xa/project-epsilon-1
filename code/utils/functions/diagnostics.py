@@ -6,7 +6,7 @@ See test_* functions in this directory for nose tests
 """
 
 import numpy as np
-import pdb
+
 
 def vol_std(data):
     """ Return standard deviation across voxels for 4D array `data`
@@ -23,10 +23,12 @@ def vol_std(data):
         One dimensonal array where ``std_values[i]`` gives the standard
         deviation of all voxels contained in ``data[..., i]``.
     """
-    std_values = [np.std(np.ravel(data[...,i])) for i in range(0, np.shape(data)[3])]
-    return np.array(std_values)
+    T = data.shape[-1]
+    data_2d = np.reshape(data, (-1, T))
+    return np.std(data_2d, axis=0)
 
-def iqr_outliers(arr_1d, iqr_scale=1):
+
+def iqr_outliers(arr_1d, iqr_scale=1.5):
     """ Return indices of outliers identified by interquartile range
 
     Parameters
@@ -49,16 +51,13 @@ def iqr_outliers(arr_1d, iqr_scale=1):
     """
     # Hint : np.lookfor('centile')
     # Hint : np.lookfor('nonzero')
-    sevenfifth = np.percentile(arr_1d,75)
-    twenfifth = np.percentile(arr_1d,25)
-    iqr = sevenfifth-twenfifth
-    low = twenfifth-iqr_scale*iqr
-    hi = iqr_scale*iqr+sevenfifth
-    outliers1 = np.array(np.nonzero(arr_1d > hi))[0]
-    outliers2 = np.array(np.nonzero((arr_1d < low)))[0]
-    outliers = np.hstack((outliers1,outliers2))
-    outliers.sort()
-    return outliers,(low, hi)
+    pct_25, pct_75 = np.percentile(arr_1d, [25, 75])
+    iqr = pct_75 - pct_25
+    lo_thresh = pct_25 - iqr * iqr_scale
+    hi_thresh = pct_75 + iqr * iqr_scale
+    is_outlier = (arr_1d < lo_thresh) | (arr_1d > hi_thresh)
+    return np.nonzero(is_outlier)[0], (lo_thresh, hi_thresh)
+
 
 def vol_rms_diff(arr_4d):
     """ Return root mean square of differences between sequential volumes
@@ -76,12 +75,11 @@ def vol_rms_diff(arr_4d):
         the mean (across voxels) of the squared difference between volume i and
         volume i + 1.
     """
-    
-    rms_values=[]
-    for i in range(arr_4d.shape[-1]-1):
-        diff_vol = arr_4d[...,i+1] - arr_4d[...,i]
-        rms_values.append(np.sqrt(np.mean(diff_vol ** 2)))
-    return np.array(rms_values)
+    T = arr_4d.shape[-1]
+    diff_data = np.diff(arr_4d, axis=-1)
+    diff_data_2d = np.reshape(diff_data, (-1, T-1))
+    return np.sqrt(np.mean(diff_data_2d ** 2, axis=0))
+
 
 def extend_diff_outliers(diff_indices):
     """ Extend difference-based outlier indices `diff_indices` by pairing
@@ -95,22 +93,14 @@ def extend_diff_outliers(diff_indices):
 
     Returns
     -------
-    extended_indices : 
+    extended_indices : array
         Array where each index ``j`` in `diff_indices has been replaced by two
         indices, ``j`` and ``j+1``, unless ``j+1`` is present in
         ``diff_indices``.  For example, if the input was ``[3, 7, 8, 12, 20]``,
         ``[3, 4, 7, 8, 9, 12, 13, 20, 21]``.
     """
-    i=0
-    while (i < len(diff_indices)):
-        if i is (len(diff_indices)-1):
-            diff_indices = np.insert(diff_indices,i+1,diff_indices[i]+1)
-            break
-        if diff_indices[i+1] == (diff_indices[i]+1):
-            i=i+1
-            continue
-        diff_indices = np.insert(diff_indices,i+1,diff_indices[i]+1)
-        i=i+2
-    return diff_indices
-
-
+    # Make two columns with the second being the first plus 1
+    ext_outliers = np.column_stack((diff_indices, diff_indices + 1))
+    # Use numpy reshape ordering to get the values from the first row, then the
+    # second row etc...
+    return np.unique(ext_outliers.ravel())
