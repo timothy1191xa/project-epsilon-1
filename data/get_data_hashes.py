@@ -4,7 +4,7 @@ and the filtered data ds005_filtered containing file names
 and corresponding hashes.
 """
 from __future__ import print_function
-from data import * 
+from data_hashes import * 
 import json
 import pdb
 
