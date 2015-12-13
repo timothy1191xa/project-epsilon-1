@@ -11,9 +11,10 @@ data_frame. This does it for you.
 
 import numpy as np
 import pandas as pd
+import os
 
-project_location="../../../"
-data_location=project_location+"data/ds005/"
+data_location=os.path.join(os.path.dirname(__file__), '../../../data/ds005/')
+
 
 def load_in_dataframe(subject_number):
 	""" Return the subject behav data combining all 3 runs and excluding invalid data (-1) in data.frame
