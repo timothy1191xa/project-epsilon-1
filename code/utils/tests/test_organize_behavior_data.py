@@ -12,13 +12,13 @@ import numpy as np
 import numpy.linalg as npl
 import nibabel as nib
 import pandas as pd
-import os, sys
+import os
+import sys
 from numpy.testing import assert_almost_equal, assert_array_equal, assert_equal 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 from organize_behavior_data import *
 
-project_location="../../../"
-data_location=project_location+"data/ds005/"
+data_location=os.path.join(os.path.dirname(__file__), '../../../data/ds005/')
 
 
 
