@@ -3,7 +3,7 @@
 
 import pandas as pd
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), "../utils/"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "./"))
 #import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import pylab as pl
