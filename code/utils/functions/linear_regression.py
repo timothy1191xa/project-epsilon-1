@@ -114,6 +114,9 @@ def combine_all_data(data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 
 def load_each_subject(data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 
+	all_subjects = ['001', '002', '003', '004', '005', '006', '007', 
+	'008', '009', '010', '011', '012', '013', '014', '015', '016']
+
 	l = []
 
 	for i in all_subjects:
@@ -281,7 +284,6 @@ def beta_statistics():
 	for i in range(len(data)):
 		betas[i], pvalues[i] = linear_regression(data[i], 'RT', 'gain', 'loss')
 
-
 	lambdas = []
 
 	for i in range(len(data)):
@@ -289,7 +291,7 @@ def beta_statistics():
 
 	return
 
-def plot_neural_and_behav_loss_aversion(data, subject):
+def plot_neural_and_behav_loss_aversion(data, beta = None):
 
 	all_subjects = ['001', '002', '003', '004', '005', '006', '007', 
 	'008', '009', '010', '011', '012', '013', '014', '015', '016']
@@ -321,11 +323,15 @@ def plot_neural_and_behav_loss_aversion(data, subject):
 	x_vals = [0, max(loss_aversion)]
 	y_vals = [my_line(0), my_line(max(loss_aversion))]
 
-	plt.plot(loss_aversion, lambdas, '+')
+	plt.plot(loss_aversion, lambdas, '+') 
 	plt.plot(x_vals, y_vals)
 
-	plt.xlabel('negative loss beta - gain beta')
-	plt.ylabel('log of lambda')
+	#plt.xlabel('negative loss beta - gain beta')
+	#plt.ylabel('log of lambda')
+	
+	plt.title("Scatterplot of correspondence between neural \nloss aversion and behavioral loss aversion")
+	plt.xlabel(r'Neural loss aversion [-($\beta[loss]) - \beta[gain]$]')
+	plt.ylabel(r'Behavioral loss aversion [ln($\lambda)$]')
 
 	plt.show()
 
