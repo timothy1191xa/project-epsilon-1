@@ -13,8 +13,8 @@ from scipy import stats
 from scipy.stats import t 
 import numpy.linalg as npl
 import math
-import log_regression
-from log_regression import *
+import logistic_reg
+from logistic_reg import *
 
 
 
