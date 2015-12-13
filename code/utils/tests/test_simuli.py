@@ -18,6 +18,8 @@ import nibabel as nib
 
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "./"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "../../../data/ds005/sub003/model/model001/onsets/task001_run001/"))
 
 import stimuli
 
