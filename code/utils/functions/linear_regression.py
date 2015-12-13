@@ -248,10 +248,6 @@ def linear_regression_fast(data, formula):
 
 	return est
 
-# My prediction for Response Time given ratio (gain/loss)
-def my_line(x, beta = B):
-    	return beta[0] + beta[1] * x
-
 
 
 def simple_regression_plot(data, dep_var, exp_var):
