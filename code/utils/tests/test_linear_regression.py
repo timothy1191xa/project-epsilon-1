@@ -28,11 +28,12 @@ import sys, os, pdb
 #Specicy the path for functions
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 import linear_regression
+from linear_regression import *
 
 
 
 
-def test_pearson_1d():
+def test_linear_regression():
 
 
 	# Create a data frame
@@ -63,3 +64,11 @@ def test_pearson_1d():
 	assert_almost_equal(expected_p2, pvalues2)
 	assert_almost_equal(expected_beta3, beta3)
 	assert_almost_equal(expected_p3, pvalues3)
+
+
+
+
+
+
+
+
