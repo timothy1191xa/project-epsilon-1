@@ -3,7 +3,7 @@
 
 import pandas as pd
 import sys
-sys.path.append(".././utils")
+sys.path.append(os.path.join(os.path.dirname(__file__), "../utils/"))
 #import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import pylab as pl
@@ -13,6 +13,7 @@ from scipy import stats
 from scipy.stats import t 
 import numpy.linalg as npl
 import math
+import log_regression
 from log_regression import *
 
 
