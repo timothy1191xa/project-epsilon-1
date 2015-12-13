@@ -12,12 +12,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 import stimuli
 
 def test_hrf():
-
-    peak_values = gamma.pdf(np.arange(0,24.1.0/100),6)
-    undershoot_values = gamma.pdf(np.arange(0,24.1.0/100), 12)
+    peak_values = gamma.pdf(np.arange(0,24, 1.0/100),6)
+    undershoot_values = gamma.pdf(np.arange(0,24,1.0/100), 12)
     values = peak_values - 0.35 * undershoot_values
     hrf = values/np.max(values) * 0.6 
-    npt.assert_array_equal(hrf,hrf(np.arange(0,24.1.0/100)))
+    npt.assert_array_equal(hrf,hrf(np.arange(0,24,1.0/100)))
     
 
 
@@ -68,4 +67,4 @@ def test_events2neural_high():
     test_high_res_times, test_high_res_neural = events2neural_high('../../../data/ds005/sub003/model/model001/onsets/task001_run001/cond002.txt')
     npt.assert_array_equal(high_res_times, test_high_res_times)
     npt.assert_array_equal(high_res_neural, test_high_res_neural)
-    
+
