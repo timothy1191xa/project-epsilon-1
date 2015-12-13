@@ -331,7 +331,6 @@ def plot_neural_and_behav_loss_aversion(data, subject):
 
 	plt.show()
 
-
 	return
 
 
