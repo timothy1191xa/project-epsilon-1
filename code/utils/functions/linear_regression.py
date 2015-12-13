@@ -318,7 +318,7 @@ def plot_neural_and_behav_loss_aversion(data, subject):
     	# Best prediction 
 		return B[0] + B[1] * x
 		
-   	x_vals = [0, max(loss_aversion)]
+	x_vals = [0, max(loss_aversion)]
 	y_vals = [my_line(0), my_line(max(loss_aversion))]
 
 	plt.plot(loss_aversion, lambdas, '+')
