@@ -2,6 +2,8 @@
 
 
 import pandas as pd
+import sys
+sys.path.append(".././utils")
 #import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import pylab as pl
@@ -11,6 +13,7 @@ from scipy import stats
 from scipy.stats import t 
 import numpy.linalg as npl
 import math
+from log_regression import *
 
 
 
@@ -114,7 +117,6 @@ def load_each_subject(data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 
 	for i in all_subjects:
 		l.append(load_data(i, data_dir))
-
 
 	for i in range(len(all_subjects)):
 		l[i]['ratio'] = l[i]['gain'] / l[i]['loss']
@@ -252,29 +254,22 @@ def my_line(x, beta = B):
 
 
 def simple_regression_plot(data, dep_var, exp_var):
-
 	y = data[dep_var]
 	x = data[exp_var]
-
 	n = len(data)
-
 	# Design X matrix
 	X = np.column_stack((np.ones(n), x))
-
 	# Get the beta
 	B = npl.pinv(X).dot(y)
-	
 	# Get the regression line
-    x_vals = [0, max(x)]
+	x_vals = [0, max(x)]
 	y_vals = [my_line(0), my_line(max(x))]
-	
 	# Plot the simple linear regression
-    plt.plot(x, y, '+')
+	plt.plot(x, y, '+')
 	plt.xlabel('ratio (gain/loss)')
 	plt.ylabel('Response Time')
 	plt.plot(x_vals, y_vals)
 	plt.title('Ratio vs Response Time with predicted line')
-	
 	return
 
 
@@ -294,6 +289,48 @@ def beta_statistics():
 
 	for i in range(len(data)):
 		lambdas.append( math.log(betas[i][2] / betas[i][1])    )
+
+	return
+
+def plot_neural_and_behav_loss_aversion(data, subject):
+
+	all_subjects = ['001', '002', '003', '004', '005', '006', '007', 
+	'008', '009', '010', '011', '012', '013', '014', '015', '016']
+
+	lambdas = []
+	loss_aversion = []
+
+	for i in range(len(all_subjects)):
+
+		a = add_gainlossratio(data[i])
+		b = organize_columns(a)
+		x = logit("respcat ~ gain + loss", b).fit()
+		logit_pars = x.params
+		ratio =  -logit_pars['loss'] / logit_pars['gain'] 
+		lambdas.append( math.log(ratio) )
+		loss_aversion.append( (-logit_pars['loss']) - logit_pars['gain'] )
+
+	X = np.column_stack((np.ones(16), loss_aversion))
+
+
+	
+	B = npl.pinv(X).dot(lambdas)
+
+	def my_line(x):
+    	# Best prediction 
+    	return B[0] + B[1] * x
+
+   	x_vals = [0, max(loss_aversion)]
+	y_vals = [my_line(0), my_line(max(loss_aversion))]
+
+	plt.plot(loss_aversion, lambdas, '+')
+	plt.plot(x_vals, y_vals)
+
+	plt.xlabel('negative loss beta - gain beta')
+	plt.ylabel('log of lambda')
+
+	plt.show()
+
 
 	return
 
