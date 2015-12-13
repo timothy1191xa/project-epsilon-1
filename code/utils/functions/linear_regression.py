@@ -2,7 +2,7 @@
 
 
 import pandas as pd
-import sys
+import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), "../utils/"))
 #import statsmodels.api as sm
 import statsmodels.formula.api as smf
