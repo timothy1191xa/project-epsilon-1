@@ -323,6 +323,9 @@ def plot_neural_and_behav_loss_aversion(data, beta = None):
 	x_vals = [0, max(loss_aversion)]
 	y_vals = [my_line(0), my_line(max(loss_aversion))]
 
+	fig = plt.figure()
+	ax = fig.add_subplot(111)
+
 	plt.plot(loss_aversion, lambdas, '+') 
 	plt.plot(x_vals, y_vals)
 
@@ -333,6 +336,10 @@ def plot_neural_and_behav_loss_aversion(data, beta = None):
 	plt.xlabel(r'Neural loss aversion [-($\beta[loss]) - \beta[gain]$]')
 	plt.ylabel(r'Behavioral loss aversion [ln($\lambda)$]')
 
+	for xy in zip(loss_aversion, lambdas):                                               
+    	ax.annotate('(%s, %s)' % xy, xy=xy, textcoords='offset points')
+
+	plt.grid()
 	plt.show()
 
 	return
