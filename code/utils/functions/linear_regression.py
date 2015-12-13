@@ -183,7 +183,7 @@ def linear_regression(data, y, *arg):
 	for i in range(1,p):
 		print('==============================================================')
 		print(arg[i-1])
-		print 'Coefficient: ' + str(beta[i]), 'p-value: ' + str(pvalues[i])
+		print ('Coefficient: ' + str(beta[i]), 'p-value: ' + str(pvalues[i]))
 
 	return beta, pvalues
 
