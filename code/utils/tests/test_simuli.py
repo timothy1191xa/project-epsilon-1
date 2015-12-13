@@ -1,6 +1,6 @@
+from __future__ import print_function  # print('me') instead of print 'me'
 from __future__ import division  # 1/2 == 0.5, not 0
 from __future__ import absolute_import
-from __future__ import print_function  # print('me') instead of print 'me'
 
 """ Test stimuli module
 Run tests with::
@@ -22,11 +22,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 import stimuli
 
 def test_hrf():
-    peak_values = gamma.pdf(np.arange(0,24, 1.0/100),6)
-    undershoot_values = gamma.pdf(np.arange(0,24,1.0/100), 12)
+    time = np.arange(0,24, 1.0/100)
+    peak_values = gamma.pdf(time,6)
+    undershoot_values = gamma.pdf(time, 12)
     values = peak_values - 0.35 * undershoot_values
-    hrf = values/np.max(values) * 0.6 
-    npt.assert_array_equal(hrf,hrf(np.arange(0,24,1.0/100)))
+    hrf_totest = values/np.max(values) * 0.6 
+    npt.assert_array_equal(hrf_totest,hrf(np.arange(0,24,1.0/100)))
     
 
 
