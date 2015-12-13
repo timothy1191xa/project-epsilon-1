@@ -5,6 +5,15 @@ Run tests with::
 
 import numpy as np
 import numpy.testing as npt
+from __future__ import print_function  # print('me') instead of print 'me'
+from __future__ import division  # 1/2 == 0.5, not 0
+from __future__ import absolute_import
+import scipy.stats
+from scipy.stats import gamma
+import numpy as np
+import matplotlib.pyplot as plt
+import nibabel as nib
+
 
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
