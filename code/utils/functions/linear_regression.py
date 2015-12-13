@@ -45,7 +45,7 @@ def load_data(subject, data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 
 	except IOError:
 
-		print "Can't find files in such directory! Please enter the directory where you store ds005 dataset!"
+		print ("Can't find files in such directory! Please enter the directory where you store ds005 dataset!")
 		return
 
 	run_1=run1.append(run2)
