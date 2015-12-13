@@ -305,7 +305,8 @@ def plot_neural_and_behav_loss_aversion(data, subject):
 		logit_pars = x.params
 		ratio =  -logit_pars['loss'] / logit_pars['gain'] 
 		lambdas.append( math.log(ratio) )
-		loss_aversion.append( (-logit_pars['loss']) - logit_pars['gain'] )
+		loss_aversion.append( (-logit_pars['loss']) - logit_pars['gain'] ) # This will be changed!
+
 
 	X = np.column_stack((np.ones(16), loss_aversion))
 
@@ -316,7 +317,7 @@ def plot_neural_and_behav_loss_aversion(data, subject):
 	def my_line(x, B = B):
     	# Best prediction 
 		return B[0] + B[1] * x
-
+		
    	x_vals = [0, max(loss_aversion)]
 	y_vals = [my_line(0), my_line(max(loss_aversion))]
 
