@@ -22,13 +22,37 @@ expect.
 from __future__ import absolute_import, division, print_function
 import pandas as pd
 import numpy as np
-from numpy.testing import assert_almost_equal
+import numpy.linalg as npl
+from numpy.testing import assert_almost_equal, assert_array_equal, assert_equal 
 import sys, os, pdb
 
 #Specicy the path for functions
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 import linear_regression
 from linear_regression import *
+
+data_location = os.path.join(os.path.dirname(__file__), '../../../data/')
+
+
+def test_load_data():
+	""" tests whether the behavior data is loadede in data frame. 
+
+	Testing on subject 2.
+	"""
+	run1 = pd.read_table(data_location+'ds005/sub002/behav/task001_run001/behavdata.txt')
+	run2 = pd.read_table(data_location+'ds005/sub002/behav/task001_run002/behavdata.txt')
+	run3 = pd.read_table(data_location+'ds005/sub002/behav/task001_run003/behavdata.txt')
+
+	#append all the runs in one pandas data frame
+	r=run1.append(run2)
+	run_total=r.append(run3)
+
+
+	run_total_array=run_total.as_matrix()
+
+	test_array=load_data(2, data_location).as_matrix()
+	assert_array_equal(run_total_array, test_array)
+
 
 
 
