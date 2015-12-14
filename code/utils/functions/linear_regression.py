@@ -176,11 +176,14 @@ def simple_regression_plot(data, dep_var, exp_var):
 	plt.plot(x_vals, y_vals)
 	plt.title('Ratio vs Response Time with predicted line')
 	return
-"""
 
 
 
-def plot_neural_and_behav_loss_aversion(all_subjects, data, beta = None):
+
+
+	
+
+	def plot_neural_and_behav_loss_aversion(all_subjects, data, beta = None):
 
 	lambdas = []
 	loss_aversion = []
@@ -223,6 +226,11 @@ def plot_neural_and_behav_loss_aversion(all_subjects, data, beta = None):
 	plt.show()
 
 	return
+"""
+
+
+
+
 
 
 
