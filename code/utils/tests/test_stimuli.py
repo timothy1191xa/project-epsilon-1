@@ -53,7 +53,6 @@ def test_events2neural():
 
 def test_events2neural_high():
     """test with gain condition from subject 3's run 001
-
     """
     TR=2
     n_trs=240
@@ -76,4 +75,3 @@ def test_events2neural_high():
     test_high_res_times, test_high_res_neural = stimuli.events2neural_high(cond)
     npt.assert_array_equal(high_res_times, test_high_res_times)
     npt.assert_array_equal(high_res_neural, test_high_res_neural)
-
