@@ -30,7 +30,6 @@ https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt
 
 def events2neural(task, tr, n_trs):
     """ Return predicted neural time course from event file `task_fname`
-
     Parameters
     ----------
     task_fname : str
@@ -43,7 +42,6 @@ def events2neural(task, tr, n_trs):
     -------
     time_course : array shape (n_trs,)
         Predicted neural time course, one value per TR
-
     """
     if task.ndim != 2 or task.shape[1] != 3:
         raise ValueError("Is {0} really a task file?", task_fname)
@@ -60,7 +58,6 @@ def events2neural_high(cond_data, TR=2, n_trs=240, tr_div=100):
     
     Parameters:
     ----------
-
     cond_data : np.array
         np.array of the condition
     TR: float (default: 2)
@@ -71,7 +68,6 @@ def events2neural_high(cond_data, TR=2, n_trs=240, tr_div=100):
         step per TR
         (We want a resolution to the 10th between each TR)
     
-
     Return
     -------
     high_res_neural: np.array
@@ -92,5 +88,3 @@ def events2neural_high(cond_data, TR=2, n_trs=240, tr_div=100):
         high_res_neural[hr_onset:hr_onset+hr_duration] = amplitude
     
     return high_res_times, high_res_neural
-
-
