@@ -17,8 +17,6 @@ import logistic_reg
 from logistic_reg import *
 
 
-
-
 """
 Parameters:
 
@@ -47,7 +45,6 @@ def load_data(subject, data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 	return(run_total)
 
 
-
 """
 To perform linear regression
 
@@ -56,6 +53,10 @@ Parameters:
 	data: The dataset that contains variables
 	y: Dependent variable
 	args: Explanatory variable(s)
+
+Return:
+	beta: The coefficients for explantatory variables
+	pvalues: The pvalues for each explantatory variables
 
 """
 def linear_regression(data, y, *arg):
@@ -110,24 +111,26 @@ def linear_regression(data, y, *arg):
 	return beta, pvalues
 
 """
-def simple_regression_plot(data, dep_var, exp_var):
-	y = data[dep_var]
-	x = data[exp_var]
-	n = len(data)
-	# Design X matrix
-	X = np.column_stack((np.ones(n), x))
-	# Get the beta
-	B = npl.pinv(X).dot(y)
-	# Get the regression line
-	x_vals = [0, max(x)]
-	y_vals = [my_line(0), my_line(max(x))]
-	# Plot the simple linear regression
-	plt.plot(x, y, '+')
-	plt.xlabel('ratio (gain/loss)')
-	plt.ylabel('Response Time')
-	plt.plot(x_vals, y_vals)
-	plt.title('Ratio vs Response Time with predicted line')
-	return
+	This is a function to generate simple regression plot
+
+	def simple_regression_plot(data, dep_var, exp_var):
+		y = data[dep_var]
+		x = data[exp_var]
+		n = len(data)
+		# Design X matrix
+		X = np.column_stack((np.ones(n), x))
+		# Get the beta
+		B = npl.pinv(X).dot(y)
+		# Get the regression line
+		x_vals = [0, max(x)]
+		y_vals = [my_line(0), my_line(max(x))]
+		# Plot the simple linear regression
+		plt.plot(x, y, '+')
+		plt.xlabel('ratio (gain/loss)')
+		plt.ylabel('Response Time')
+		plt.plot(x_vals, y_vals)
+		plt.title('Ratio vs Response Time with predicted line')
+		return
 
 
 	This is the function that is undone - 	
@@ -149,9 +152,6 @@ def simple_regression_plot(data, dep_var, exp_var):
 
 
 	X = np.column_stack((np.ones(16), loss_aversion))
-
-
-	
 	B = npl.pinv(X).dot(lambdas)
 
 	def my_line(x, B = B):
