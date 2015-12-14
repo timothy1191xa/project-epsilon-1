@@ -110,54 +110,6 @@ def linear_regression(data, y, *arg):
 	return beta, pvalues
 
 """
-def linear_regression_RT_with_gain_and_loss(data):
-
-	# Get the length of data
-	n = len(data)
-
-	# Get the coefficient matrix
-	X = np.column_stack((np.ones(n), data['gain'], data['loss']))
-	Y = data['RT']
-
-	# Calculate the coefficients
-	beta = npl.pinv(X).dot(Y)
-
- 	# The fitted values - y hat
-	fitted = X.dot(beta)
-
-	# Residual error
-	errors = Y - fitted
-
-	# Residual sum of squares
-	RSS = (errors**2).sum(axis=0) # (Y - X.dot(beta)).T.dot(Y - X.dot(beta))
-
-	# Degrees of freedom
-	df = X.shape[0] - npl.matrix_rank(X)
-
-	# Mean residual sum of squares
-	MRSS = RSS / df
-
-	# Calculate t statistics
-	t_intercept = abs(beta[0] - 0)/ (math.sqrt(MRSS * npl.inv(X.T.dot(X))[0,0])) 
-	t_gain = abs(beta[1] - 0)/ (math.sqrt(MRSS * npl.inv(X.T.dot(X))[1,1])) 
-	t_loss = abs(beta[2] - 0)/ (math.sqrt(MRSS * npl.inv(X.T.dot(X))[2,2]))
-
-	# Calculate the p-values
-	pval_intercept = stats.t.sf(np.abs(t_intercept), df-1)*2
-	pval_gain = stats.t.sf(np.abs(t_gain), df-1)*2
-	pval_loss = stats.t.sf(np.abs(t_loss), df-1)*2
-
-	print('==============================================================')
-	print('Gain:')
-	print 'Coefficient: ' + str(beta[1]), 'p-value: ' + str(pval_gain)
-	print('==============================================================')
-	print('Loss:')
-	print 'Coefficient: ' + str(beta[2]), 'p-value: ' + str(pval_loss)
-
-	return
-
-
-
 def simple_regression_plot(data, dep_var, exp_var):
 	y = data[dep_var]
 	x = data[exp_var]
@@ -178,10 +130,7 @@ def simple_regression_plot(data, dep_var, exp_var):
 	return
 
 
-
-
-
-	
+	This is the function that is undone - 	
 
 	def plot_neural_and_behav_loss_aversion(all_subjects, data, beta = None):
 
