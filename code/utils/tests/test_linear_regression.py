@@ -50,7 +50,7 @@ def test_load_data():
 
 	run_total_array=run_total.as_matrix()
 
-	test_array=load_data(2, data_location).as_matrix()
+	test_array=load_data('002', data_location).as_matrix()
 	assert_array_equal(run_total_array, test_array)
 
 
