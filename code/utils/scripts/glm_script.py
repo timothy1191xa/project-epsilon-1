@@ -34,7 +34,7 @@ txt_paths = [('ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv'+ c.zfill(3),\
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv003_canonical.txt', \
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv004_canonical.txt', \
               '../../../data/ds005/sub' + s.zfill(3) + '/BOLD/task001_run' \
-              + r.zfill(3) + '/bold.nii',\
+              + r.zfill(3) + '/bold.nii.gz',\
               conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv_001_high_res.txt',\
               conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv_002_high_res.txt',\
               conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv_003_high_res.txt',\
