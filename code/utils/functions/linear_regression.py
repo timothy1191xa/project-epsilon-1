@@ -155,7 +155,7 @@ def linear_regression_RT_with_gain_and_loss(data):
 	print 'Coefficient: ' + str(beta[2]), 'p-value: ' + str(pval_loss)
 
 	return
-"""
+
 
 
 def simple_regression_plot(data, dep_var, exp_var):
@@ -176,6 +176,7 @@ def simple_regression_plot(data, dep_var, exp_var):
 	plt.plot(x_vals, y_vals)
 	plt.title('Ratio vs Response Time with predicted line')
 	return
+"""
 
 
 

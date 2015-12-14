@@ -6,8 +6,9 @@ from linear_regression import *
 
 # Get the data
 all_subjects= ['001', '002' ,'003', '004', '005', '006', '007', '008', '009', '010', '011', '012', '013', '014', '015', '016']
-data_dir = "/Users/macbookpro/Desktop/stat159_Project/"
-
+# data_dir = "/Users/macbookpro/Desktop/stat159_Project/"
+project_path = '../../../'
+data_dir = project_path+'data/'
 
 
 ########################
@@ -64,10 +65,6 @@ for i in range(len(all_subjects)):
 
 
 
-
-
-
-
 #######################
 #  Peform regression  #
 #######################
@@ -80,5 +77,11 @@ linear_regression(data, 'RT', 'gain', 'loss')
 linear_regression(data, 'RT', 'ratio')
 
 linear_regression(data, 'RT', 'diff')
+
+
+#######################
+#        Plot         #
+#######################
+
 
 
