@@ -24,10 +24,7 @@ for i in all_subjects:
 	# if there's no such dataset, then stop running the loop and return nothing
 	if temp is None:
 		return
-
-
-
-all_data.append(temp)
+	all_data.append(temp)
 
 # Concat the data
 all_data = pd.concat(all_data)
@@ -35,15 +32,11 @@ all_data = pd.concat(all_data)
 # Calculate the difference for future use
 all_data['diff'] = all_data['gain'] - all_data['loss']
 
-# Calculate the ratio for future use
+# Calculate the ratio and other variables for future use
 all_data['ratio'] = all_data['gain'] / all_data['loss']
-
 all_data['log_gain'] = np.log(all_data['gain'])
-
 all_data['log_loss'] = np.log(all_data['loss'])
-
 all_data['log_diff'] = np.log(all_data['diff'])
-
 all_data['log_ratio'] = np.log(all_data['ratio'])
 
 # # Remove the rows that have respcat == -1 
@@ -65,9 +58,9 @@ for i in range(len(all_subjects)):
 
 
 
-#######################
-#  Peform regression  #
-#######################
+##############################
+#  Peform linear regression  #
+##############################
 
 data = all_data
 
@@ -83,5 +76,26 @@ linear_regression(data, 'RT', 'diff')
 #        Plot         #
 #######################
 
+
+# PLot the simple regression
+# Since the ratio is the most significant predictor
+
+y = data['RT']
+x = data['ratio']
+n = len(data)
+# Design X matrix
+X = np.column_stack((np.ones(n), x))
+# Get the beta
+B = npl.pinv(X).dot(y)
+# Get the regression line
+x_vals = [0, max(x)] # since the ratio wouldn't be negative
+y_vals = [my_line(0), my_line(max(x))]
+# Plot the simple linear regression
+plt.plot(x, y, '+')
+plt.xlabel('ratio (gain/loss)')
+plt.ylabel('Response Time')
+plt.plot(x_vals, y_vals)
+plt.title('Ratio vs Response Time with predicted line')
+plt.show()
 
 
