@@ -77,4 +77,25 @@ linear_regression(data, 'RT', 'diff')
 #######################
 
 
+# PLot the simple regression
+# Since the ratio is the most significant predictor
+
+y = data['RT']
+x = data['ratio']
+n = len(data)
+# Design X matrix
+X = np.column_stack((np.ones(n), x))
+# Get the beta
+B = npl.pinv(X).dot(y)
+# Get the regression line
+x_vals = [0, max(x)] # since the ratio wouldn't be negative
+y_vals = [my_line(0), my_line(max(x))]
+# Plot the simple linear regression
+plt.plot(x, y, '+')
+plt.xlabel('ratio (gain/loss)')
+plt.ylabel('Response Time')
+plt.plot(x_vals, y_vals)
+plt.title('Ratio vs Response Time with predicted line')
+plt.show()
+
 
