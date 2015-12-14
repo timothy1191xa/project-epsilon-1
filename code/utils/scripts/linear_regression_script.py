@@ -24,10 +24,7 @@ for i in all_subjects:
 	# if there's no such dataset, then stop running the loop and return nothing
 	if temp is None:
 		return
-
-
-
-all_data.append(temp)
+	all_data.append(temp)
 
 # Concat the data
 all_data = pd.concat(all_data)
@@ -35,15 +32,11 @@ all_data = pd.concat(all_data)
 # Calculate the difference for future use
 all_data['diff'] = all_data['gain'] - all_data['loss']
 
-# Calculate the ratio for future use
+# Calculate the ratio and other variables for future use
 all_data['ratio'] = all_data['gain'] / all_data['loss']
-
 all_data['log_gain'] = np.log(all_data['gain'])
-
 all_data['log_loss'] = np.log(all_data['loss'])
-
 all_data['log_diff'] = np.log(all_data['diff'])
-
 all_data['log_ratio'] = np.log(all_data['ratio'])
 
 # # Remove the rows that have respcat == -1 
@@ -65,9 +58,9 @@ for i in range(len(all_subjects)):
 
 
 
-#######################
-#  Peform regression  #
-#######################
+##############################
+#  Peform linear regression  #
+##############################
 
 data = all_data
 
