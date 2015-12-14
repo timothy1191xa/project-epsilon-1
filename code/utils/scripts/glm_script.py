@@ -4,7 +4,7 @@ import numpy as np
 from glm import *
 #from convolution_normal_script import X_matrix
 #from convolution_high_res_script import X_matrix_high_res
-from load_BOLD import *
+#from load_BOLD import *
 import nibabel as nib
 import matplotlib.pyplot as plt
 from smoothing import *
@@ -33,7 +33,7 @@ txt_paths = [('ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv'+ c.zfill(3),\
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv002_canonical.txt', \
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv003_canonical.txt', \
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv004_canonical.txt', \
-              '../../data/ds005/sub' + s.zfill(3) + '/BOLD/task001_run' \
+              '../../../data/ds005/sub' + s.zfill(3) + '/BOLD/task001_run' \
               + r.zfill(3) + '/bold.nii',\
               conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv_001_high_res.txt',\
               conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv_002_high_res.txt',\
@@ -98,9 +98,9 @@ for txt_path in txt_paths:
 
     location_of_txt= dirs[0]
     file = open(location_of_txt+ '/' + name[0:17] +'_mrss_result.txt', "w")
-    file.write("MRSS of multiple regression for" +name[0:17]+ "is: "+str(np.mean(MRSS))+"\n")
+    file.write("MRSS of multiple regression for" +name[0:17]+ " is: "+str(np.mean(MRSS))+"\n")
     file.write("\n")
-    file.write("MRSS of multiple regression for" +name[0:17]+ "using the smoothed data is: "+str(np.mean(MRSS_smooth))+"\n")
+    file.write("MRSS of multiple regression for" +name[0:17]+ " using the smoothed data is: "+str(np.mean(MRSS_smooth))+"\n")
     file.write("\n")
-    file.write("MRSS of multiple regression for" +name[0:17]+ "using high_res design matrix is: "+str(np.mean(MRSS_high_res))+"\n")
+    file.write("MRSS of multiple regression for" +name[0:17]+ " using high_res design matrix is: "+str(np.mean(MRSS_high_res))+"\n")
     file.close()
