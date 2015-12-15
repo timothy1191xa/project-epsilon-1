@@ -65,11 +65,11 @@ for i in range(len(all_subjects)):
 data = all_data
 
 # Run the linear_regression function to get the summary
-linear_regression(data, 'RT', 'gain', 'loss')
+beta1, pvalues1 = linear_regression(data, 'RT', 'gain', 'loss')
 
-linear_regression(data, 'RT', 'ratio')
+beta2, pvalues2 = linear_regression(data, 'RT', 'ratio')
 
-linear_regression(data, 'RT', 'diff')
+beta3, pvalues3 = linear_regression(data, 'RT', 'diff')
 
 
 #######################
