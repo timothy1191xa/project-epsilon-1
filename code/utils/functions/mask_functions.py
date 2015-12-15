@@ -3,60 +3,79 @@
 A collection of functions to make masks on data.
 See test_* functions in this directory for nose tests
 """
+from __future__ import print_function, division
+
 import sys, os, pdb
 import numpy as np
 import nibabel as nib
+import numpy.linalg as npl
 
-def get_mask_filtered_data(img_path, mask_path):
-    """Return the masked filtered data
+from os.path import splitext
+from numpy.testing import assert_array_equal
+from scipy.ndimage import affine_transform
 
+
+def make_binary_mask(data, mask_bool):
+    """Return a numpy array with 0 and 1 
     Parameters
     ----------
-    img_path: string
-    	path to the 4D data
-    
-    mask_path: string
-        path to the mask function
-
-    Return
-    ------
-    masked_func: 4D array
-        masked filtered data
-    
+    data: array of float data
+    mask_bool : array of bool
+    Returns
+    -------
+    new_mask: array of float with 1 corresponding
+        to the True values of mask_bool
     """
-    func_img = nib.load(img_path)
-    mask_img = nib.load(mask_path)
-    mask = mask_img.get_data()
-    func_data = func_img.get_data()
-    # Make data 4D to prepare for "broadcasting"
-    mask = np.reshape(mask, mask.shape + (1,))
-    # "Broadcasting" expands the final length 1 dimension to match the func data
-    masked_func = nib.Nifti1Image(func_data, func_img.affine, func_img.header)
-    # nib.save(masked_func, 'masked_' + img_name )
-    return masked_func
+    data = np.asarray(data)
+    mask_bool = np.asarray(mask_bool)
+    assert(len(data.shape) == len(mask_bool.shape)),\
+    "Data and mask shape differ \n" \
+    + "Data dim is: %s\nMask dim is: %s" \
+    %(len(data.shape), len(mask_bool.shape))
+    assert(all(data.shape[i] >= mask_bool.shape[i] \
+           for i in range(len(data.shape)))),\
+    "Data and mask shape are not compatible"\
+    +"Data shape is: %s\nMask shape is: %s"\
+    %(data.shape, mask_bool.shape)
+    new_mask = np.zeros(data.shape)
+    new_mask[mask_bool] = 1
+    return new_mask 
+
+def make_bool_mask(mask_binary):
+    """Return a bool type mask from binary mask
+    Parameters
+    ----------
+    mask_path : 3D float type numpy array
+        the binary array to create the mask from
+        has 0 and 1
+   
+    Returns
+    -------
+    mask_bool : 3D bool type numpy array
+        the bool array created from the binary array
+    """
+    mask_bool = (mask_binary > 0.5)
+    return mask_bool
 
 
-def make_mask_img(data_3d, mask_3d):
-    """Apply mask on a 3D image and return the masked data
+def apply_mask(data, mask):
+    """Apply mask on an image and return the masked data
 
     Parameters
     ----------
-    data_3d: 3D numpy array
+    data: numpy array
         The subject's run image data
-    mask_3d: 3D numpy array    
+    mask: numpy array same shape as data  
         The mask for the corresponding data_3d
-	has values 1 inside the brain and values 0 outside
-    
+        has 1 for the positions to select and 
+      	0 for the positions to filter out.
     Return
     ------
-    masked_func: 3D numpy array
-        masked data
-    
+    masked_data: numpy array 
+        Array with the values of the data at the selected positions
+	and 0 for the position filtered out by the mask.
     """
-    # Make sure the data_3d and mask_3d have same shape
-    assert data_3d.shape == mask_3d.shape, \
-           "Data and Mask shapes differ \n" \
-           + "data shape: %s" %(data_3d.shape) \
-	   + "maske shape: %s" %(mask_3d.shape)
-    return data_3d * mask_3d
+    assert(data.shape == mask.shape), "Data and mask shape differ \n" \
+    + "Data shape i: %s\nMask shape is: %s" %(data.shape, mask.shape)
+    return data * mask 
 
