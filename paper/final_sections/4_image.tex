@@ -26,25 +26,39 @@ After we tried with the normal convolution matrix, we also generated high resolu
 
 \subsubsection {Hypothesis Testing}
 From linear regression, we can get t-statistics for different conditions(task on/off, gain, loss, distance).For each condition, we will have a 3D t-statistics matrix. For visualization, we first added mask based the mean voxel and the histogram. We set a boolean mask which takes larger than 375. Also we used smooth function and better color txt to generate a better image. Then we plotted the t statistics map for gain/loss. 
-\begin{figure}[H] 
-\centering \includegraphics[scale=0.5]{../fig/t_test/ds005_sub001_t1r1_t-test_cond2.png}	 
-\caption{T Statistics for Gain Subject 1 Run 1}
-\end{figure} 
-\begin{figure}[H] 
-\centering 
-\includegraphics[scale=0.5]{../fig/t_test/ds005_sub001_t1r1_t-test_cond3.png} 
-\caption{T Statistics for Loss Subject 1 Run 1}
+\begin{figure}[H]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../fig/t_test/ds005_sub001_t1r1_t-test_cond2.png}
+  \caption{Gain}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../fig/t_test/ds005_sub001_t1r1_t-test_cond3.png}
+  \caption{Loss}
+  \label{fig:sfig2}
+\end{subfigure}
+\caption{t statistics map for gain/loss (subject1)}
+\label{fig:fig}
 \end{figure}
-\begin{figure}[H] 
-\centering 
-\includegraphics[scale=0.5]{../fig/t_test/ds005_sub005_t1r1_t-test_cond2.png}	 
-\caption{T Statistics for Gain Subject 5 Run 1}
-\end{figure} 
-\begin{figure}[H] 
-\centering 
-\includegraphics[scale=0.5]{../fig/t_test/ds005_sub005_t1r1_t-test_cond3.png} 
-\caption{T Statistics for Loss Subject 5 Run 1}
-\end{figure}  
+
+\begin{figure}[H]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../fig/t_test/ds005_sub005_t1r1_t-test_cond2.png}
+  \caption{Gain}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../fig/t_test/ds005_sub005_t1r1_t-test_cond3.png}
+  \caption{Loss}
+  \label{fig:sfig2}
+\end{subfigure}
+\caption{t statistics map for gain/loss (subject5)}
+\label{fig:fig}
+\end{figure}
 \noindent
 The larger the t-statistics, the more significant. Thus the red spots represents the activated voxels for gain and loss. For subject 1, gain has more activated voxels. However, for subject 5, loss has more activated voxels.
 
@@ -54,8 +68,6 @@ The larger the t-statistics, the more significant. Thus the red spots represents
 
 \subsection {Results}
 In terms of convolution, to analyze the difference between two approaches, we compare the MRSS from two linear regressions on image data of three subjects (1,2,3) using convolution predictors from two different approaches. In the below table, we see the MRSS from linear regression using the latter approach has slightly lower residuals compared to the former method. This makes sense because, using the latter method, we are able to more elaborately preprocess the data.
-
-
 
 
 
