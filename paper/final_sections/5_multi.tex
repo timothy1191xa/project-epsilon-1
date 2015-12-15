@@ -1,10 +1,23 @@
 \section{Multi-Comparison}
+
 \subsection{Introduction}
-\noindent
-After exploring behavior data, we proceed to image data analysis.  First we need to apply convolution to connect behavior stimuli and neural activity. Then we can run general linear regression to find activated voxels across time course. Using hypothesis testing, we can actually locate and visualize the activated voxels. After finishing basic steps, we try to apply noise modeling and PCA to compare the MRSS so that we can finally decide our design matrix.
+As our intended goal of this project is to locate the ROI \(Region of Interest\) in a brain according to this mixed gamble task, the significant issue is the specification of an appropriate threshold for statistical maps. Therefore, we are interested in multi-comparison across subjects. In the previous analysis on single subject, we were able to locate the generally activated voxels. With these data, we attempted to find out the general pattern in each voxel of brains across 16 subjects. 
 
 \subsection{Methods}
-Here are some of the methods (this needs to be updated soon as well.)
+As our intended goal of this project is to locate the ROI \(Region of Interest\) in a brain according to this mixed gamble task, the significant issue is the specification of an appropriate threshold for statistical maps. Therefore, we are interested in multi-comparison across subjects. In the previous analysis on single subject, we were able to locate the generally activated voxels. With these data, we attempted to find out the general pattern in voxels of brains across 16 subjects. 
+
+To multi-compare, we chose to explore on filtered data set (shape: 91*109 * 91) since original data set is not normalized in terms of voxel location. Applying our general linear modeling on each subject as above, we first collected all beta values for each voxel across time course of each subject. Now, we have beta values of shape of (91, 109, 91) for each of 16 subjects. We compare on each single voxel across subjects. To do this, We have total 4 steps.
+
+\begin{itemize}
+\item Calculate average of beta value on a single voxel across 16 subjects. Do this for whole voxels.\\
+\item Calculate standard deviation of beta value on a single voxel across 16 subjects. Do this for whole voxels. \\
+\item Calculate T-statistics of beta value on a single voxel across 16 subjects. Do this for whole voxels.\\
+\[ 
+  t-statistics = \dfrac{mean}{\dfrac{SE(mean)}{\sqrt{n}}}
+\]
+
+\item Calculate P-value of beta value on a single voxel across 16 subjects. Do this for whole voxels. \\
+\end{itemize}
 
 \subsection {Results}
 this needs to be updated
