@@ -1,0 +1,52 @@
+\section{Behavioral Data Analysis}
+
+\subsection{Introduction}
+\noindent
+First of all, we generated some summary statistics including correlation among variables, and tried both linear and logistic regression analysis for behavioral data. The scientific questions that we have are - if we can predict response time and response (to gamble or not to gamble) based on the gain and loss.
+
+\subsection{Methods}
+\noindent
+We did some explanatory data analysis and regression analysis using behavior 
+data. For explanatory data analysis, we generated some summary statistics, 
+including correlation among variables and simple plots to better understand 
+the behavior. And then we used regression analysis to mainly answer two 
+scientific questions. The scientific questions that we have are:
+\begin{itemize}
+\item If gain/loss would be significant for individuals who choose to 
+participate and how much time it would take for them to respond.
+\item If gain/loss would be significant for whether individuals would like to 
+participate in the gamble. 
+\end {itemize}
+
+\subsubsection {Linear Regression}
+I will change this.
+\begin{enumerate}
+\item  Response Time $\sim$ gain + loss
+\item  Response Time $\sim$ diff(gain-loss)
+\item  Response Time $\sim$ ratio(gain/loss)
+\end {enumerate}
+
+\subsubsection {Logistic Regression}
+\noindent
+To answer the second question, we fit logistic regression between Accept/Reject
+Gamble and gain/loss. According to our analysis, the decision to whether take 
+the gamble of most of subjects, in general, is more affected by loss amount 
+rather than by gain amount.  For example, below is the analysis on the subject 
+3. The regression line shows that it well follows the border between the two 
+decisions: 1 (gamble) and 0 (not gamble). Right side of the line illustrates 
+the decision to not gamble and it takes up more area relative to the opposite 
+decision.
+\paragraph
+Logistic Regression is a statistical technique capable of predicting a binary outcome. Since, in this data, the researchers classify the decision to gamble as '1' or '0' otherwise, we can use logistic regression technique to explain the subject's tendency to gamble or not based on the condition of the gain and loss amount given in the process of experiment. Our goal is to identify the how gain and loss amount influence each subject's response. To do this, we use the statsmodels Logit function. We specify the response column in the behavior txt file as the one containing the variable we're trying to explain and the gain and loss columns as the predictor variables. After plotting the results on the plot, we were able to see some interesting behaviors of some subjects. As you see from the plot , Subject 1 is in general more risk seeking: as long as the gain amount is large enough as 20 dollars, he decides to gamble. However, Subject 3 shows the opposite behavior: she does not participate in the gamble when her loss amount is higher than 10 dollars no matter what the gain amount is. (To see the overall behaviors from all subjects, see the appendix) Overall, we could see that the logistic regression line fits well on the border between the decision to gamble and not gamble. 
+
+
+
+\subsection {Results}
+For linear regression, ratio is a significant predictor and people would actually care more about loss than gain.
+\paragraph
+The paper illustrates as ?people typically reject gambles that offer a 50/50 chance of gaining or losing money, unless the amount that could be gained is at least twice the amount that could be lost (Sabrina)?. In the experiment, the given gain and loss amount ratio to each subject is around 2 to 1. This refers subjects would not merely show risk averse behavior every trial. We could confirm this trend by observing the plots. We are hard to tell whether subjects are risk averse or not.
+
+
+
+
+
