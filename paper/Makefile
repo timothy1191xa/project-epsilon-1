@@ -1,6 +1,6 @@
 SHELL="/bin/bash"
 
-TITLE="report"
+TITLE="final_report"
 
 all:
 	pdflatex $(TITLE).tex

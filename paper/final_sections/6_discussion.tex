@@ -1,10 +1,31 @@
 \section{Discussion and Conclusion}
-\subsection{Discussion}
 \noindent
+\par In this analysis, we explore both behavior and brain data. 
+Our logistic model for the behavior 
+data revealed clear disctinction between subject's aversion to loss 
+(see appendix A.1). For example, we can see how subject 1 and 5 have 
+very different behavior related to gain and loss. 
+With the BOLD image analysis, we went through the process of designing
+our design matrix for our linear model.
+We realozed the huge influence on smoothing the data in the performance of
+model. The noise modeling including the PCA could have been improved by 
+adding other regressors to the model. Our first principal component
+has a very big amplitude, despite our normalization. We used the filtered
+data maked available by the OpenfMRI project to compare the brain
+activation voxesls accross subjects. Although we did not have time to
+further investigate these available data, that would have been interesting
+to compare the performance of our resulting model and the filtered data.
+Our first very exciting but yet challenging objective was to link the behavior
+data with the brain image data. 
+A very exciting but yest challenging objective was to link the behavior
+data with the brain image data. The idea was to predict the subject response
+on the [0:1] or [1,2,3,4] scale based on the activity of the significant voxel.
+We started the process with the analysis of both behavior and BOLD data separetely.
+Knowing the location of the significant voxels, one could for instance, include the
+blood pressure level or 'level of activation' of the isolated voxels to predict
+the bet of the corresponding subject. 
 
 
-\subsection{Conclusion}
-Update the conclusion!
 
 
 
