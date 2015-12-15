@@ -15,7 +15,7 @@ verbose:
 	nosetests data/tests code/utils/tests -v
 
 data:
-	cd data && make data
+	cd data && make download_data
 
 
 linear:
