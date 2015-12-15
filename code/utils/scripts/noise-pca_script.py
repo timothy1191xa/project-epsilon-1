@@ -125,7 +125,7 @@ for image_path in images_paths:
     plt.savefig(project_path+'fig/BOLD/%s_mean_voxels_countour.png'\
                 %(d_path['type'] + str(name)))
     #plt.show()
-    #plt.clf()
+    plt.clf()
     
     # Convolution with 1 to 4 conditions
     convolved = np.zeros((240,5))
@@ -184,18 +184,17 @@ for image_path in images_paths:
 	            %(d_path['type'] + str(name), str(reg_str[k]))+'.png')
         plt.close()
 	#plt.show()
-	#plt.clf()
+	plt.clf()
 	#Show the middle slice only
         plt.imshow(betas_vols[:, :, 18, k], cmap='gray', alpha=0.5)
         plt.colorbar()
-        plt.title('In brain voxel - Slice 18 \n' \
-	          'Projection on %s - %s'\
+        plt.title('In brain voxel - Slice 18 Projection on %s\n%s'\
 	          %(str(reg_str[k]), d_path['type'] + str(name)))
 	plt.savefig(\
 	project_path+'fig/linear_model/mosaic/middle_slice/%s_withdrift_middleslice_%s'\
 	%(d_path['type'] + str(name), str(k))+'.png')
 	#plt.show()
-        #plt.clf()
+        plt.clf()
 	plt.close()
 
     # PCA Analysis
@@ -217,7 +216,7 @@ for image_path in images_paths:
 	plt.savefig(project_path+'fig/pca/projections/%s_PC#%s.png' \
 	%((d_path['type'] + str(name),str(i))))
         #plt.show()
-	#plt.clf()
+	plt.clf()
 	plt.close()
 
     # Variance Explained analysis
@@ -291,7 +290,7 @@ for image_path in images_paths:
 	'fig/linear_model/mosaic/middle_slice/%s_withPCA_middle_slice_%s'\
 	%(d_path['type'] + str(name), str(k))+'.png')
 	#plt.show()
-        #plt.clf()
+        plt.clf()
         plt.close()
     
     # Residuals

@@ -3,6 +3,10 @@ This script creates some graphs for QA analysis for each subjects
  - Outliers plots
  - histograms of the mean voxels
 
+Run with:
+    python hist-outliers_script.py
+    from this directory
+
 """
 
 from __future__ import division
@@ -43,7 +47,9 @@ for d in dirs:
 dir_path = project_path+'data/ds005/'
 # Uncomment to run all subjects
 #subject_list = [str(i) for i in range(1,17)]
-subject_list = ['1']
+subject_list = ['1','5']
+
+# Choose run here (1,2 and/or 3)
 run_list = [str(i) for i in range(1,2)]
 images_paths = [('ds005_sub' + s.zfill(3) + '_t1r' + r, \
                  dir_path + 'sub' + s.zfill(3) + '/BOLD/task001_run' \
@@ -61,12 +67,10 @@ for image_path in images_paths:
 #    Take the mean value over time and plot an histogram
     mean_vol = np.mean(data, axis=-1)
     plt.hist(np.ravel(mean_vol), bins=100)
-    plt.title('Mean values of voxels ' + str(name))
-    plt.xlabel('time')
-    plt.ylabel('voxels mean value')
+    plt.title('Histogram of mean values of voxels accross time\n' + str(name))
     plt.savefig(project_path+'fig/histograms/' + str(name) + '_hist.png')
+    plt.xlabel('Mean value of voxels accross time')
     plt.close()
-    pdb.set_trace()
     # Outliers
     vol_stds = diagnostics.vol_std(data)
     assert len(vol_stds) == vol_shape
@@ -118,7 +122,6 @@ for image_path in images_paths:
     plt.savefig(project_path+\
     'txt_output/outliers/%s_extended_vol_rms_outliers.png'%str(name))
     plt.close()
-
 
 print("=============================")
 print("\nHistograms and outliers plots generated")
