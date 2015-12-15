@@ -33,8 +33,8 @@ Please follow the insturctions to explore on the repository.
  - Report `make verbose` : Creates a report in pdf file under paper/ folder
 
 ## Contributors
-Min Gu Jo ([([`mingujo`](https://github.com/mingujo))
-Soazig Kaam Min Gu Jo ([([`soazig`](https://github.com/soazig))
-Zhuangdi Li ([([`lizhua`](https://github.com/lizhua))
-Ye Zhi ([([`ye-zhi`](https://github.com/ye-zhi))
-Timothy Yu ([([`timothy1191xa`](https://github.com/timothy1191xa))
+Min Gu Jo ([`mingujo`](https://github.com/mingujo))\\
+Soazig Kaam ([`soazig`](https://github.com/soazig))\\
+Zhuangdi Li ([`lizhua`](https://github.com/lizhua))\\
+Ye Zhi ([`ye-zhi`](https://github.com/ye-zhi))\\
+Timothy Yu ([`timothy1191xa`](https://github.com/timothy1191xa))\\
