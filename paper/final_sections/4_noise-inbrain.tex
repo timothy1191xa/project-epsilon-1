@@ -1,5 +1,5 @@
-\section{Noise modeling}
-\subsection{In brain voxels}
+\subsection{Noise modeling}
+\subsubsection{In brain voxels}
 
 For our analysis, we use the voxel by time matrix that only includes the voxel 
 inside of the brain. For the raw data, we determine the mask visually by plotting
@@ -19,15 +19,15 @@ the histogram of the mean values of the voxels accross time.
   \label{fig:histb}
 \end{subfigure}
 \caption{Histogram of mean value of the voxels accross time for subject 1 and 5 - run 1}
-\label{fig:fig}
+\label{fig:hist}
 \end{figure}
 
-\par We can see from Figure \ref{fig:hist1} and \ref{fig:hist2} for the first run for
+\par We can see from Figure \ref{fig:hista} and \ref{fig:histb} for the first run for
 subjects 1 and 5 that we can set the threshold to a mean value of the voxels accross
 time of 375. Our further analysis with the raw data uses a mask on the mean data accross
 time that select the ones with a higher value than the threshold.
 
-\subsection{Selecting the voxels in the brain - filtered data}
+\subsubsection{Selecting the voxels in the brain - filtered data}
 
 \par For the filtered data, we applied the mask provided by the Montreal Neurological 
 Institute's website. The filter has 1 for the voxels inside the brain and 0 outside.

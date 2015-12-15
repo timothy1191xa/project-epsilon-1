@@ -1,4 +1,4 @@
-\subsection{Principal Component Analysis}
+\subsubsection{Principal Component Analysis}
 \noindent
 \par We substracted the mean accross voxels from our data in order to normalize the data.
 We then apply the Single Value Decomposition (SVD) on the covariance matrix. The resulting
@@ -58,7 +58,7 @@ for our analysis.
 In order to determine how many principal components to include in our design matrix,
 we plotted Variance Explained plots presented in the following sections.
 
-\subsection{Variance explained} 
+\subsubsection{Variance explained} 
 \noindent
 \par In the Single Value Decomposition of the data, the the square roots of the 
 singular values ordered from greatest to least along its diagonal. Each value 
@@ -91,7 +91,7 @@ In this particular case, the elbow shape of the graph makes a disctinction betwe
 (the figure does not show the first principal component). Filtering out the first three principal 
 components is justified here.
 
-\subsection{Noise modeling results}
+\subsubsection{Noise modeling results}
 \noindent
 \par We calculated the Mean Root Sum Square (MRSS) of the residuals of our different model.
 For the run 1 of the subject 1, the mean of MRSS accross the voxels decreased from 23.89 
@@ -101,7 +101,7 @@ The mean MRSS resulting is 1.04 when we include the drift terms and 0.79 includi
 principal components.
 
 \begin{figure}[H]
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.45\textwidth}
     \centering
     \includegraphics[width=.9\linewidth]{../fig/mosaic/ds005_sub001_t1r1_withdrift_Task.png}
     \caption{Design matrix includes linear and quadratic drifts regressors}
@@ -109,7 +109,7 @@ principal components.
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=.8\linewidth]{../fig/mosaic/ds005_sub001_t1r1_withPCA_Task.png}
+    \includegraphics[width=.9\linewidth]{../fig/mosaic/ds005_sub001_t1r1_withPCA_Task.png}
     \caption{Design matrix includes drifts and PC regressors}
     \label{fig:betas2}
 \end{subfigure}
