@@ -28,7 +28,9 @@ Please follow the insturctions to explore on the repository.
  16 subjects. When rin from this repository, this commend will download the raw data and
  the filerted data provided. The total size of the file is ~17GB.
 
- - Validate `make validate` : Validates the downloaded data 
+ - Validate `make validate_data` : Validates the downloaded data 
+
+ - Clean `make clean` : remove compiled python files
 
  - All Analysis `make all-analysis` : Executes all analysis and creates relevant 
  img files under fig/ folder
