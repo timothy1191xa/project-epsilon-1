@@ -9,20 +9,32 @@
 _**Topic:**_ [The Neural Basis of Loss Aversion in Decision-Making Under Risk] 
 
 ## Overview
-This repository attempts to reproduce the original analysis on "The Neural Basis of Loss Aversion in Decision-Making Under Risk" done by Sabrina M. Tom, Craig R. Fox, Christopher Trepel, Russell A. Poldrack. The imaging data were collected using the fMRI method. They were processed and analyzed in order to identify the regions of the brain activated by the decision making process. This study also investigated the relationship between the brain activity and the behavior of the subjects towards the gambling situations using a whole-brain robust regression analysis. 
+This repository attempts to reproduce the original analysis on 
+"The Neural Basis of Loss Aversion in Decision-Making Under Risk" 
+done by Sabrina M. Tom, Craig R. Fox, Christopher Trepel, Russell A. Poldrack. 
+The imaging data were collected using the fMRI method. They were processed 
+and analyzed in order to identify the regions of the brain activated by the 
+decision making process. This study also investigated the relationship between 
+the brain activity and the behavior of the subjects towards the gambling situations 
+using a whole-brain robust regression analysis. 
 Please follow the insturctions to explore on the repository.
-
 
 ## Directions
 1. Clone the repo: `git clone https://github.com/berkeley-stat159/project-epsilon.git'
 2. Install python dependencies with pip: `pip install -r requirements.txt` 
 
 ### Navigation
- - Data `make data` : Downloads the ds005 dataset including brain scan images of totl 16 subjects
+ - Data `make data` : Downloads the ds005 dataset including brain scan images of total 
+ 16 subjects. When rin from this repository, this commend will download the raw data and
+ the filerted data provided. The total size of the file is ~17GB.
 
- - Validate `make validate` : Validates the downloaded data to check if it's ok to run on 
+ - Validate `make validate` : Validates the downloaded data 
 
- - All Analysis `make all-analysis` : Executes all analysis and creates relevant img files under fig/ folder
+ - All Analysis `make all-analysis` : Executes all analysis and creates relevant 
+ img files under fig/ folder
+ - If you want to perform each analysis, please be aware of the following dependencies:
+   - noise-pca (prerequisites: convolution)
+   - noise-pca_filtered (prerequisites: convolution, download_all)
 
  - Test `make test` : Tests the functions in code/utils folder
 
@@ -30,7 +42,7 @@ Please follow the insturctions to explore on the repository.
 
  - Verbose `make verbose` : Tests the functions in code/utils folder via nosetests option
 
- - Report `make report` : Creates a report in pdf file under paper/ folder
+ - Report `make report` : Creates final_report.pdf under paper/
 
 ## Contributors
 Min Gu Jo ([`mingujo`](https://github.com/mingujo))\\
