@@ -43,7 +43,7 @@ txt_paths = [('ds005_sub' + s.zfill(3) + '_t1r1' +'_cond'+ c.zfill(3),\
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv002_canonical.txt', \
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv003_canonical.txt', \
               conv_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv004_canonical.txt', \
-              '../../../data/ds005_2/sub' + s.zfill(3) + '/model/model001/task001_run002' \
+              '../../../data/ds005/sub' + s.zfill(3) + '/model/model001/task001_run002' \
               #for me (Min) it's ds005_2... the filtered data set
               + '.feat/filtered_func_data_mni.nii.gz',\
               conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv_001_high_res.txt',\

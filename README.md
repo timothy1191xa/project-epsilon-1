@@ -30,7 +30,7 @@ Please follow the insturctions to explore on the repository.
 
  - Verbose `make verbose` : Tests the functions in code/utils folder via nosetests option
 
- - Report `make verbose` : Creates a report in pdf file under paper/ folder
+ - Report `make report` : Creates a report in pdf file under paper/ folder
 
 ## Contributors
 Min Gu Jo ([`mingujo`](https://github.com/mingujo))\\
