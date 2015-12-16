@@ -15,7 +15,6 @@ Step
 
 
 import sys, os
-##sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 sys.path.append(os.path.join(os.path.dirname('__file__'), "../functions/"))
 sys.path.append(os.path.join(os.path.dirname('__file__'), "./"))
 import numpy as np
@@ -47,7 +46,7 @@ for d in dirs:
 template = nib.load(project_path+\
            'data/mni_icbm152_t1_tal_nlin_asym_09c_2mm.nii')
 template_data = template.get_data()
-img = nib.load(project_path+'data/ds005_2/sub001/model/model001/task001_run002.feat/' + \
+img = nib.load(project_path+'data/ds005/sub001/model/model001/task001_run002.feat/' + \
  'masked_filtered_func_data_mni.nii.gz')
 
 task = dict()
