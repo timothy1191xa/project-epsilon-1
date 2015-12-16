@@ -1,9 +1,14 @@
 """data.py
 
-Simple script to validate the downloaded data:
- - ds005
- - ds005_filtered
- - ds114
+Simple script to validate the downloaded with
+with the hashes in a .json file.
+
+Prerequesite :
+   To create the json file relative to a specific
+   folder, see project-epsilon/data/get_data_hashes.py
+
+Assuming the ds005_hashes.json file is present:
+   python data.py
 """
 
 import pdb
@@ -12,10 +17,7 @@ import json
 from data_hashes import check_hashes 
 
 if __name__ == "__main__":
-#TODO: add the folder ds005 here
-    file_ls = ['ds005_filtered_hashes.json',\
-              # 'ds005_hashes.json',\
-               'ds114_hashes.json']
+    file_ls = ['ds005_hashes.json']
     for f in file_ls:
         with open(f) as infile:
             f_dict = json.load(infile)

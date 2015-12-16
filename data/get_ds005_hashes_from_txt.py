@@ -6,7 +6,6 @@ Run wuth:
     python get_ds005_hashes_from_txt.py
 """
 from __future__ import print_function
-from data_hashes import create_dict 
 import json
 import pdb
 
