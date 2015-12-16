@@ -1,8 +1,9 @@
 """ Linear Regression on Begavioral data """
 
 import sys
-sys.path.append(".././utils")
+sys.path.append("../functions")
 from linear_regression import *
+from scipy import stats
 
 # Get the data
 all_subjects= ['001', '002' ,'003', '004', '005', '006', '007', '008', '009', '010', '011', '012', '013', '014', '015', '016']
@@ -23,7 +24,7 @@ for i in all_subjects:
 	temp = load_data(i, data_dir)
 	# if there's no such dataset, then stop running the loop and return nothing
 	if temp is None:
-		return
+		break
 	all_data.append(temp)
 
 # Concat the data
@@ -89,13 +90,13 @@ X = np.column_stack((np.ones(n), x))
 B = npl.pinv(X).dot(y)
 # Get the regression line
 x_vals = [0, max(x)] # since the ratio wouldn't be negative
-y_vals = [my_line(0), my_line(max(x))]
-# Plot the simple linear regression
-plt.plot(x, y, '+')
-plt.xlabel('ratio (gain/loss)')
-plt.ylabel('Response Time')
-plt.plot(x_vals, y_vals)
-plt.title('Ratio vs Response Time with predicted line')
-plt.show()
+# y_vals = [my_line(0), my_line(max(x))]
+# # Plot the simple linear regression
+# plt.plot(x, y, '+')
+# plt.xlabel('ratio (gain/loss)')
+# plt.ylabel('Response Time')
+# plt.plot(x_vals, y_vals)
+# plt.title('Ratio vs Response Time with predicted line')
+# plt.show()
 
 
