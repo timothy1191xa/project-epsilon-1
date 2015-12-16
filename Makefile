@@ -1,4 +1,4 @@
-.PHONY: all clean coverage test verbose
+.PHONY: all clean coverage test verbose data
 
 all: clean
 
