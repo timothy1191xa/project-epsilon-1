@@ -22,6 +22,7 @@ all_data = []
 # Loop for 16 subjects to get the data
 for i in all_subjects:
 	temp = load_data(i, data_dir)
+	#temp = load_data(i)
 	# if there's no such dataset, then stop running the loop and return nothing
 	if temp is None:
 		break
@@ -53,6 +54,7 @@ data_each = []
 
 for i in all_subjects:
 	data_each.append(load_data(i, data_dir))
+	#data_each.append(load_data(i))
 
 for i in range(len(all_subjects)):
 	data_each[i]['ratio'] = data_each[i]['gain'] / data_each[i]['loss']
@@ -88,15 +90,20 @@ n = len(data)
 X = np.column_stack((np.ones(n), x))
 # Get the beta
 B = npl.pinv(X).dot(y)
+
 # Get the regression line
+def my_line(x, B):
+    # Best prediction 
+	return B[0] + B[1] * x
+
 x_vals = [0, max(x)] # since the ratio wouldn't be negative
-# y_vals = [my_line(0), my_line(max(x))]
-# # Plot the simple linear regression
-# plt.plot(x, y, '+')
-# plt.xlabel('ratio (gain/loss)')
-# plt.ylabel('Response Time')
-# plt.plot(x_vals, y_vals)
-# plt.title('Ratio vs Response Time with predicted line')
-# plt.show()
+y_vals = [my_line(0, B), my_line(max(x), B)]
+# Plot the simple linear regression
+plt.plot(x, y, '+')
+plt.xlabel('ratio (gain/loss)')
+plt.ylabel('Response Time')
+plt.plot(x_vals, y_vals)
+plt.title('Ratio vs Response Time with predicted line')
+plt.show()
 
 
