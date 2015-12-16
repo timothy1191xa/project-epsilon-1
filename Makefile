@@ -50,7 +50,6 @@ multi-comparison:
 	cd code/utils/scripts && python multi_comparison_script.py
 
 all-analysis:
-	make data
 	make eda 
 	make linear
 	make logistic
