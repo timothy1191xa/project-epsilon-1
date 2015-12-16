@@ -7,7 +7,8 @@ Prerequesite :
    To create the json file relative to a specific
    folder, see project-epsilon/data/get_data_hashes.py
 
-Assuming the ds005_hashes.json file is present:
+Assuming the ds005_hashes.json file is present
+in the directory:
    python data.py
 """
 
