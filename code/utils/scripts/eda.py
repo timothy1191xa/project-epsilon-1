@@ -66,8 +66,8 @@ for dat in path_dict:
         name = image_path[0]
         # Plot
         if d_path['type']=='filtered':
-	    data = nib.load(image_path[1]).get_data()
-	    data = data.astype(float)
+	    data_int = nib.load(image_path[1]).get_data()
+	    data = data_int.astype(float)
             mean_data = np.mean(data, axis=-1)
             Transpose=False
 	    template_data = nib.load(template_path).get_data()
@@ -76,8 +76,8 @@ for dat in path_dict:
 	        cmap='gray', alpha=1)
 	else:
             img = nib.load(image_path[1])
-            data = img.get_data()
-	    data = data.astype(float)
+            data_int = img.get_data()
+	    data = data_int.astype(float)
             mean_data = np.mean(data, axis=-1)
 	    in_brain_mask = mean_data > 375
             mean_data = np.mean(data, axis=-1)
