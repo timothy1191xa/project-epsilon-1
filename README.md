@@ -32,12 +32,6 @@ Please follow the insturctions to explore on the repository.
 
  - Clean `make clean` : remove compiled python files
 
- - All Analysis `make all-analysis` : Executes all analysis and creates relevant 
- img files under fig/ folder
- - If you want to perform each analysis, please be aware of the following dependencies:
-   - noise-pca (prerequisites: convolution)
-   - noise-pca_filtered (prerequisites: convolution, download_all)
-
  - Test `make test` : Tests the functions in code/utils folder
 
  - Coverage `make coverage` : Creates a coverage report for the functions in code/utils/ folder
@@ -45,6 +39,26 @@ Please follow the insturctions to explore on the repository.
  - Verbose `make verbose` : Tests the functions in code/utils folder via nosetests option
 
  - Report `make report` : Creates final_report.pdf under paper/
+
+ - All Analysis `make all-analysis` : Executes all analysis and creates relevant 
+ img files under fig/ folder
+ 	 - NOTICE : `make multi-comparison` will run about for 1 hour because it has to generate all the betav values for each single voxel for each subject over time-course
+
+	 - If you want to perform each analysis, please be aware of the following dependencies:
+	   - noise-pca (prerequisites: convolution)
+	   - noise-pca_filtered (prerequisites: convolution, download_all)
+
+ - Each of analysis :
+   - `make eda` 
+   - `make linear`
+   - `make logistic`
+   - `make convolution-high`
+   - `make convolution-normal`
+   - `make t-test`
+   - `make glm`
+   - `make correlation`
+   - `make noise-pca`
+   - `make multi-comparison`
 
 ## Contributors
 Min Gu Jo ([`mingujo`](https://github.com/mingujo))\\
