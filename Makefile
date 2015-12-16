@@ -47,7 +47,7 @@ noise-pca:
 	cd code/utils/scripts && python noise-pca_filtered_script.py
 
 multi-comparison:
-	code code/utils/scripts && python multi_comparison_script.py
+	cd code/utils/scripts && python multi_comparison_script.py
 
 all-analysis:
 	make eda 
@@ -59,3 +59,8 @@ all-analysis:
 	make correlation
 	make noise-pca 
 	make multi-comparison
+
+report:
+	cd paper && make all
+
+
