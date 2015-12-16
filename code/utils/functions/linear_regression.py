@@ -17,19 +17,19 @@ import logistic_reg
 from logistic_reg import *
 
 
-"""
-Parameters:
-
-	subject: 1 - 16
-	data_dir: The working directory that you store your data
-
-Return:
-	
-	run_total: the data for 3 runs
-
-"""
 def load_data(subject, data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 	
+	"""
+	Parameters:
+
+		subject: 1 - 16
+		data_dir: The working directory that you store your data
+
+	Return:
+		
+		run_total: the data for 3 runs
+
+	"""
 	# Get the directory where data is stored
 	data_location = data_dir + 'ds005/sub' + subject
 
@@ -45,22 +45,22 @@ def load_data(subject, data_dir = "/Users/macbookpro/Desktop/stat159_Project/"):
 	return(run_total)
 
 
-"""
-To perform linear regression
 
-Parameters:
-
-	data: The dataset that contains variables
-	y: Dependent variable
-	args: Explanatory variable(s)
-
-Return:
-	beta: The coefficients for explantatory variables
-	pvalues: The pvalues for each explantatory variables
-
-"""
 def linear_regression(data, y, *arg):
+	"""
+	To perform linear regression
 
+	Parameters:
+
+		data: The dataset that contains variables
+		y: Dependent variable
+		args: Explanatory variable(s)
+
+	Return:
+		beta: The coefficients for explantatory variables
+		pvalues: The pvalues for each explantatory variables
+
+	"""
 	# Get the length of data
 	n = len(data)
 

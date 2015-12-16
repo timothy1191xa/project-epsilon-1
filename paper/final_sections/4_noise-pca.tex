@@ -101,27 +101,26 @@ The mean MRSS resulting is 1.04 when we include the drift terms and 0.79 includi
 principal components.
 
 \begin{figure}[H]
-\begin{subfigure}{.45\textwidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{../fig/mosaic/ds005_sub001_t1r1_withdrift_Task.png}
-    \caption{Design matrix includes linear and quadratic drifts regressors}
-    \label{fig:betas1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=.9\linewidth]{../fig/mosaic/ds005_sub001_t1r1_withPCA_Task.png}
-    \caption{Design matrix includes drifts and PC regressors}
-    \label{fig:betas2}
-\end{subfigure}
-\caption{Mean values of the Betas coefficients on the slice 18 of in brain voxels}
-\label{fig:betas}
+  \centering
+  \includegraphics[scale=0.75]{../fig/mosaic/ds005_sub001_t1r1_withdrift_Task.png}
+  \caption{Beta coefficients with drifts}
+  \label{fig:betas1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.85]{../fig/mosaic/ds005_sub001_t1r1_withPCA_Task.png}
+  \caption{Beta coefficients with PCs}
+  \label{fig:betas2}
 \end{figure}
 
 \noindent
 \par Betas coefficients of our linear model related to the brain activation with the task 
-are plotted on the brain image in Figure \ref{fig:betas}. We can see on both model 
+are plotted on the brain image in Figures \ref{fig:betas1} and \ref{fig:betas2}. We can see on both model 
 (with or without the PC) we can localized the region of the brain related to the task 
 activation thanks to the values of the betaghest the values are in red, the lowest in blue. 
 From the journal article, we know the regions of interest are the inferior/middle frontal 
-(see (100,200:400) and (150,0:300)), the ventral stratium (275, (150:400)) for example. Further analysis and statistical tests are needed to locate the activated voxels with task, which is developped in the next section.
+(see (100,200:400) and (150,0:300)), the ventral stratium (275, (150:400)) for example. 
+Further analysis and statistical tests are needed to locate the activated voxels with task,
+which is developped in the next section.
 

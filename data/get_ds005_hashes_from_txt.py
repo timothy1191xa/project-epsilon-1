@@ -6,7 +6,6 @@ Run wuth:
     python get_ds005_hashes_from_txt.py
 """
 from __future__ import print_function
-from data_hashes import create_dict 
 import json
 import pdb
 
@@ -33,6 +32,6 @@ def create_dict(filename):
 
 #For our data ds005
 newDict = create_dict('ds005_raw_checksums.txt')
-with open('ds005_hashes_checksums.json', 'w') as file_out:
+with open('ds005_hashes.json', 'w') as file_out:
     json.dump(newDict, file_out)
 #    print(check_hashes(newDict))
