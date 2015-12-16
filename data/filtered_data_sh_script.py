@@ -33,7 +33,7 @@ file_name = 'filtered_func_data_mni.nii.gz'
 txt_out = []
 for s in subject_list:
     for r in run_list:
-        start = 'wget -N -P ' + data_path
+        start = 'wget -P ' + data_path
         location = project_id + '/sub'+ s.zfill(3)\
            +'/model/model001/task001_run%s.feat/'%(r.zfill(3))
         link = base_url + location + file_name
