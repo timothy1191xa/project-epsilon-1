@@ -27,7 +27,7 @@ eda:
 linear:
 	cd code/utils/scripts && python linear_regression_script.py
 
-lostic:
+logistic:
 	cd code/utils/scripts && python log_regression_script.py
 
 t-test:
