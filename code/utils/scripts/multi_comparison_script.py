@@ -53,13 +53,16 @@ loss = dict()
 
 #load all of them
 for x in range(1,17):
-	task[x] = np.loadtxt(dirs[0]+'/ds005_sub'+str(x).zfill(3)+'_t1r1_beta_task.txt')
+#for x, sub in enumerate['1','5']:
+	task[x] = np.loadtxt(dirs[0]+'/ds005_sub'+str(sub).zfill(3)+'_t1r1_beta_task.txt')
 
 for x in range(1,17):
-	gain[x] = np.loadtxt(dirs[0]+'/ds005_sub'+str(x).zfill(3)+'_t1r1_beta_gain.txt')
+#for x, sub in enumerate['1','5']:
+	gain[x] = np.loadtxt(dirs[0]+'/ds005_sub'+str(sub).zfill(3)+'_t1r1_beta_gain.txt')
 
 for x in range(1,17):
-	loss[x] = np.loadtxt(dirs[0]+'/ds005_sub'+str(x).zfill(3)+'_t1r1_beta_loss.txt')
+#for x, sub in enumerate['1','5']:
+	loss[x] = np.loadtxt(dirs[0]+'/ds005_sub'+str(sub).zfill(3)+'_t1r1_beta_loss.txt')
 
 # for x in range(1,17):
 # 	dist[x] = np.loadtxt(dirs[0]+'/ds005_sub'+str(x).zfill(3)+'_t1r1_beta_dist.txt')
@@ -255,7 +258,7 @@ plt.colorbar()
 plt.savefig(dirs[1]+'/pval_gain.png')
 plt.clf()
 print("  Plot for the GAIN condition saved in " + dirs[1] + '/pval_gain.png')
-
+print("Multi comparison analysis done")
 
 
 
