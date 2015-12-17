@@ -1,4 +1,4 @@
-"""mask_functions.py
+"""mask_filtered_data.py
 
 A collection of functions to make masks on data.
 See test_* functions in this directory for nose tests
@@ -28,7 +28,8 @@ def make_bool_mask(mask_path):
         the bool array created from the binary array
     """
     mask_img = nib.load(mask_path)
-    mask_data = mask_img.get_data()
+    mask_data_int = mask_img.get_data()
+    mask_data = mask_img_int.astype(float)
     mask_bool = mask_data == 1
     return mask_bool
 
@@ -52,8 +53,10 @@ def make_mask_filtered_data(func_path, mask_path):
     """
     func_img = nib.load(func_path)
     mask_img = nib.load(mask_path)
-    mask = mask_img.get_data()
-    func_data = func_img.get_data()
+    mask_int = mask_img.get_data()
+    func_data_int = func_img.get_data()
+    mask = mask_int.astype(float)
+    func_data = func_data_int.astype(float)
     # Make data 4D to prepare for "broadcasting"
     mask = np.reshape(mask, mask.shape + (1,))
     # "Broadcasting" expands the final length 1 dimension to match the func data

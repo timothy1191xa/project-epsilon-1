@@ -47,7 +47,7 @@ for d in dirs:
 dir_path = project_path+'data/ds005/'
 # Uncomment to run all subjects
 #subject_list = [str(i) for i in range(1,17)]
-subject_list = ['1','5']
+subject_list = ['1', '5']
 
 # Choose run here (1,2 and/or 3)
 run_list = [str(i) for i in range(1,2)]
@@ -61,7 +61,8 @@ images_paths = [('ds005_sub' + s.zfill(3) + '_t1r' + r, \
 for image_path in images_paths:
     name = image_path[0]
     img = nib.load(image_path[1])
-    data = img.get_data()
+    data_int = img.get_data()
+    data = data_int.astype(float)
     vol_shape = data.shape[-1]
     mean_vol = np.mean(data, axis=-1)
 #    Take the mean value over time and plot an histogram
