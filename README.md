@@ -60,8 +60,11 @@ Please follow the insturctions to explore on the repository.
    - `make multi-comparison`
 
 - If you want to perform each analysis, please be aware of the following dependencies:
+   - linear (prerequisites: convolution)
+   - t-test (prerequisites: convolution)
+   - glm (prerequesites: convolution)
    - noise-pca (prerequisites: convolution)
-   - noise-pca_filtered (prerequisites: convolution, download_all)
+   - multi-comparison (prerequisites: convolution)
 
 ## Contributors
 Min Gu Jo ([`mingujo`](https://github.com/mingujo))\\
