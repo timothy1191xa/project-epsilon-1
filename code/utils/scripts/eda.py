@@ -20,7 +20,7 @@ project_path = '../../../'
 data_path = project_path+'data/ds005/' 
 path_dict = {'data_filtered':{ 
 			      'type' : 'filtered',
-			      'feat' : '.feat/',
+			      'feat' : '.feat',
 			      'bold_img_name' : 'filtered_func_data_mni.nii.gz',
 			      'run_path' : 'model/model001/'
 			     },

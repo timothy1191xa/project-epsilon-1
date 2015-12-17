@@ -1,4 +1,4 @@
-.PHONY: all clean coverage test verbose
+.PHONY: all clean coverage test verbose data
 
 all: clean
 
@@ -42,20 +42,25 @@ convolution-normal:
 correlation:
 	cd code/utils/scripts && python correlation_script.py
 
+glm:
+	cd code/utils/scripts && python glm_script.py
+
 noise-pca:
 	cd code/utils/scripts && python noise-pca_script.py
 	cd code/utils/scripts && python noise-pca_filtered_script.py
 
 multi-comparison:
+	cd code/utils/scripts && python multi_beta_script.py
 	cd code/utils/scripts && python multi_comparison_script.py
 
 analysis-except-multi:
 	make eda 
 	make linear
 	make logistic
-	make t-test
 	make convolution-high
 	make convolution-normal
+	make t-test
+	make glm
 	make correlation
 	make noise-pca 
 

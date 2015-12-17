@@ -1,8 +1,9 @@
 """ Linear Regression on Begavioral data """
 
 import sys
-sys.path.append(".././utils")
+sys.path.append("../functions")
 from linear_regression import *
+from scipy import stats
 
 # Get the data
 all_subjects= ['001', '002' ,'003', '004', '005', '006', '007', '008', '009', '010', '011', '012', '013', '014', '015', '016']
@@ -21,9 +22,10 @@ all_data = []
 # Loop for 16 subjects to get the data
 for i in all_subjects:
 	temp = load_data(i, data_dir)
+	#temp = load_data(i)
 	# if there's no such dataset, then stop running the loop and return nothing
 	if temp is None:
-		return
+		break
 	all_data.append(temp)
 
 # Concat the data
@@ -52,6 +54,7 @@ data_each = []
 
 for i in all_subjects:
 	data_each.append(load_data(i, data_dir))
+	#data_each.append(load_data(i))
 
 for i in range(len(all_subjects)):
 	data_each[i]['ratio'] = data_each[i]['gain'] / data_each[i]['loss']
@@ -87,9 +90,14 @@ n = len(data)
 X = np.column_stack((np.ones(n), x))
 # Get the beta
 B = npl.pinv(X).dot(y)
+
 # Get the regression line
+def my_line(x, B):
+    # Best prediction 
+	return B[0] + B[1] * x
+
 x_vals = [0, max(x)] # since the ratio wouldn't be negative
-y_vals = [my_line(0), my_line(max(x))]
+y_vals = [my_line(0, B), my_line(max(x), B)]
 # Plot the simple linear regression
 plt.plot(x, y, '+')
 plt.xlabel('ratio (gain/loss)')
