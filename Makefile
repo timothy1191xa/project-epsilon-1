@@ -49,7 +49,7 @@ noise-pca:
 multi-comparison:
 	cd code/utils/scripts && python multi_comparison_script.py
 
-all-analysis:
+analysis-except-multi:
 	make eda 
 	make linear
 	make logistic
@@ -58,7 +58,6 @@ all-analysis:
 	make convolution-normal
 	make correlation
 	make noise-pca 
-	make multi-comparison
 
 report:
 	cd paper && make all
