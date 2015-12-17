@@ -76,7 +76,8 @@ for dat in path_dict:
         # Plot
         if d_path['type']=='filtered':
             Transpose=False
-	    template_data = nib.load(template_path).get_data()
+	    template_data_int = nib.load(template_path).get_data()
+	    template_data = template_data_int.astype(float)
 	    plt.imshow(\
 	        plot_mosaic(template_data, transpose=Transpose), \
 	        cmap='gray', alpha=1)
