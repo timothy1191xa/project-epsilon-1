@@ -1,5 +1,5 @@
-""" Tests for glm function in glm module
-This checks the glm function.
+""" test_glm.py_
+This script checks the glm function.
 
 Run at the tests directory with:
     nosetests code/utils/tests/test_glm.py
@@ -13,13 +13,11 @@ import os
 import sys
 from numpy.testing import assert_almost_equal, assert_array_equal
 
-
 # Add path to functions to the system path.
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
-
 # Load our GLM functions. 
-from glm import glm_beta, glm_mrss
+from glm_func import *
 project_path=os.path.join(os.path.dirname(__file__), '../../../')
 
 def test_glm_beta():
