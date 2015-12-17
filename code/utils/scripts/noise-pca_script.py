@@ -95,7 +95,7 @@ dirs = [project_path+'fig/',\
 for d in dirs:
     if not os.path.exists(d):
         os.makedirs(d)
-print{"Starting noise-pca for the raw data analysis\n")
+print("Starting noise-pca for the raw data analysis\n")
 
 for image_path in images_paths:
     name = image_path[0]
