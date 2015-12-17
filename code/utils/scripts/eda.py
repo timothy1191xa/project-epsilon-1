@@ -36,7 +36,7 @@ path_dict = {'data_filtered':{
 
 # Run only for subject 1 and 5 - run 1
 run_list = [str(i) for i in range(1,2)]
-subject_list = ['1']
+subject_list = ['1','5']
 
 # set gray colormap and nearest neighbor interpolation by default
 plt.rcParams['image.cmap'] = 'gray'
@@ -101,4 +101,3 @@ for dat in path_dict:
 sys.stdout.write("======================================\n")
 sys.stdout.write("EDA analysis done\n")
 sys.stdout.write("Mosaic plots in project_epsilon/fig/BOLD/ \n")
-sys.stdout.write("Histogram plots in project_epsilon/fig/histograms/ \n\n")

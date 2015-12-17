@@ -48,11 +48,13 @@ if __name__=='__main__':
     #'../../../data/ds005/sub001/BOLD/task001_run001/bold.nii.gz') 
     template = nib.load(project_path+\
                'data/mni_icbm152_t1_tal_nlin_asym_09c_2mm.nii')
-    template_data = template.get_data()
+    template_data_int = template.get_data()
+    template_data = template_data_int.astype(float)
     img = nib.load(project_path+\
          'data/ds005/sub001/model/model001/task001_run001.feat/' + \
 	 'masked_filtered_func_data_mni.nii.gz')
-    img_data = img.get_data()
+    img_data_int = img.get_data()
+    img_data = img_data_int.astype(float) 
     mean_data = np.mean(img_data, axis=-1)
     plt.title('In brain voxels - mean values')
     plt.imshow(plot_mosaic(template_data, transpose=False), cmap='gray', alpha=1)

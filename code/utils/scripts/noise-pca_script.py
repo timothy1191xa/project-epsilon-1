@@ -2,8 +2,12 @@
 This script is used to design the design matrix for our linear regression.
 We explore the influence of linear and quadratic drifts on the model 
 performance.
-
+Script for the raw data.
+Run with:
+    python noise-pca_script.py
+    from this directory
 """
+
 from __future__ import print_function, division
 import sys, os, pdb
 from scipy import ndimage
@@ -51,7 +55,7 @@ path_dict = {'data_filtered':{
 
 # Run only for subject 1 and 5 - run 1
 run_list = [str(i) for i in range(1,2)]
-subject_list = ['1','5']
+subject_list = ['1', '5']
 
 d_path = path_dict['data_original'] #OR original or filtered 
 
@@ -91,6 +95,7 @@ dirs = [project_path+'fig/',\
 for d in dirs:
     if not os.path.exists(d):
         os.makedirs(d)
+print{"Starting noise-pca for the raw data analysis\n")
 
 for image_path in images_paths:
     name = image_path[0]
@@ -100,13 +105,15 @@ for image_path in images_paths:
 	    + 'masked_filtered_func_data_mni.nii.gz')
 	# Image shape (91, 109, 91, 240)
 	#in_brain_img = make_mask_filtered_data(image_path[1],mask_path)
-	data = in_brain_img.get_data()
+	data_int = in_brain_img.get_data()
+        data = data_int.astype(float)
         mean_data = np.mean(data, axis=-1)
         in_brain_mask = (mean_data - 0.0) < 0.01	
 	Transpose = False
     else:
         img = nib.load(image_path[1])
-        data = img.get_data()
+        data_int = img.get_data()
+	data = data_int.astype(float)
         mean_data = np.mean(data, axis=-1)
         in_brain_mask = mean_data > thres
 	Transpose = True
@@ -350,9 +357,8 @@ for image_path in images_paths:
 
 print("======================================")
 print("\n Noise and PCA analysis done")
-print("Design Matrix including drift terms \
-      stored in project_epsilon/txt_output/drifts/ \n\n")
-print("Design Matrix including PCs terms \
-      stored in project_epsilon/txt_output/pca/\n\n")
+print("Design Matrix including drift terms stored in project_epsilon/txt_output/drifts/ \n\n")
+print("Design Matrix including PCs terms stored in project_epsilon/txt_output/pca/\n\n")
+print("Mean MRSS models results in project_epsilon/txt_output/MRSS/ds005_MRSS.json\n\n")
 
 

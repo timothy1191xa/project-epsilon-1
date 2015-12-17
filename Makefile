@@ -62,5 +62,7 @@ all-analysis:
 
 report:
 	cd paper && make all
+	cd paper && make clean
+       	
 
 
