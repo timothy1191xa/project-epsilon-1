@@ -1,4 +1,4 @@
-.PHONY: all clean coverage test verbose data
+.PHONY: all clean coverage test verbose data eda linear logistic t-test glm
 
 all: clean
 

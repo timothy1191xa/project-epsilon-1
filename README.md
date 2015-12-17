@@ -38,15 +38,14 @@ Please follow the insturctions to explore on the repository.
 
  - Verbose `make verbose` : Tests the functions in code/utils folder via nosetests option
 
- - Report `make report` : Creates final_report.pdf under paper/
+ - Report `make report` : Creates final_report.pdf under paper/ and clean the paper/ directory
 
- - All Analysis `make all-analysis` : Executes all analysis and creates relevant 
- img files under fig/ folder
- 	 - NOTICE : `make multi-comparison` will run about for 1 hour because it has to generate all the betav values for each single voxel for each subject over time-course
-
-	 - If you want to perform each analysis, please be aware of the following dependencies:
-	   - noise-pca (prerequisites: convolution)
-	   - noise-pca_filtered (prerequisites: convolution, download_all)
+ - Analysis for Subject 1 and 5 `make analysis-except-multi` : Executes all analysis (
+ except for the multi comparison) and creates relevant  img files under fig/ folder
+ 	 - NOTICE : `make multi-comparison` will run about for 1 hour because it 
+	 has to generate all the beta values for each single voxel for each subject 
+	 over time-course.
+ - To make all analyses `make analysis-except-multi` and then `make multi-comparison`
 
  - Each of analysis :
    - `make eda` 
@@ -59,6 +58,10 @@ Please follow the insturctions to explore on the repository.
    - `make correlation`
    - `make noise-pca`
    - `make multi-comparison`
+
+- If you want to perform each analysis, please be aware of the following dependencies:
+   - noise-pca (prerequisites: convolution)
+   - noise-pca_filtered (prerequisites: convolution, download_all)
 
 ## Contributors
 Min Gu Jo ([`mingujo`](https://github.com/mingujo))\\
