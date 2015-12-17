@@ -131,7 +131,8 @@ for image_path in images_paths:
 				        cmap='gray', alpha=1)
     else:
         img = nib.load(image_path[1])
-        data = img.get_data()
+        data_int = img.get_data()
+	data = data_int.astype(float)
         mean_data = np.mean(data, axis=-1)
         in_brain_mask = mean_data > thres
 	Transpose = True

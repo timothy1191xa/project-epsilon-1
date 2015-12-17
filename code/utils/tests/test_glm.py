@@ -26,7 +26,8 @@ def test_glm_beta():
     # Read in the image data.
     img = nib.load(project_path + \
           'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
-    data = img.get_data()
+    data_int = img.get_data()
+    data = data_int.astype(float)
     # Read in the convolutions.
     p = 2
     convolved1 = np.loadtxt(project_path + \
@@ -48,7 +49,8 @@ def test_glm_beta():
 def test_glm_mrss():
     img = nib.load(project_path + \
           'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
-    data = img.get_data()
+    data_int = img.get_data()
+    data = data_int.astype(float)
     convolved1 = np.loadtxt(project_path + \
                  'data/ds114/sub009/behav/task002_run001/ds114_sub009_t2r1_conv.txt')
     X_matrix = np.ones((len(convolved1), 2))
