@@ -54,7 +54,8 @@ condition = ['task','gain','loss','dist']
 #Use the first image to get the data dimensions
 image_path = data_path + 'sub001/BOLD/task001_run001/bold.nii.gz'
 img = nib.load(image_path)
-data = img.get_data()
+data_int = img.get_data()
+data = data_int.astype(float)
 #set the TR
 TR = 2.0
 
