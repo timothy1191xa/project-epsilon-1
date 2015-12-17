@@ -36,7 +36,7 @@ path_dict = {'data_filtered':{
 
 # Run only for subject 1 and 5 - run 1
 run_list = [str(i) for i in range(1,2)]
-subject_list = ['1', '5']
+subject_list = ['1','5']
 
 # set gray colormap and nearest neighbor interpolation by default
 plt.rcParams['image.cmap'] = 'gray'
@@ -52,6 +52,12 @@ for d in dirs:
 # Template to plot the unmasked filetered data
 template_path = project_path+'data/mni_icbm152_t1_tal_nlin_asym_09c_2mm.nii'
 
+# Progress bar
+l = len(subject_list)*len(run_list)
+sys.stdout.write("Starting EDA analysis\n")
+sys.stdout.write("EDA: ")
+sys.stdout.flush()
+
 # Loop through the data type - raw or filtered
 for dat in path_dict:
     d_path = path_dict[dat]
@@ -64,23 +70,18 @@ for dat in path_dict:
                      for s in subject_list]
     for image_path in images_paths:
         name = image_path[0]
+        data_int = nib.load(image_path[1]).get_data()
+        data = data_int.astype(float)
+        mean_data = np.mean(data, axis=-1)
         # Plot
         if d_path['type']=='filtered':
-	    data = nib.load(image_path[1]).get_data()
-	    data = data.astype(float)
-            mean_data = np.mean(data, axis=-1)
             Transpose=False
 	    template_data = nib.load(template_path).get_data()
 	    plt.imshow(\
 	        plot_mosaic(template_data, transpose=Transpose), \
 	        cmap='gray', alpha=1)
 	else:
-            img = nib.load(image_path[1])
-            data = img.get_data()
-	    data = data.astype(float)
-            mean_data = np.mean(data, axis=-1)
 	    in_brain_mask = mean_data > 375
-            mean_data = np.mean(data, axis=-1)
             Transpose=True
             plt.contour(\
 	        plot_mosaic(in_brain_mask, transpose=Transpose), \
@@ -93,9 +94,10 @@ for dat in path_dict:
                     %(d_path['type'] + str(name)))
         #plt.show()
         plt.clf()
+        plt.close()
+        sys.stdout.write("\n\b=")
+        sys.stdout.flush()
 
-
-print("======================================")
-print("\nEDA analysis done")
-print("Mosaic plots in project_epsilon/fig/BOLD/ \n\n")
-
+sys.stdout.write("======================================\n")
+sys.stdout.write("EDA analysis done\n")
+sys.stdout.write("Mosaic plots in project_epsilon/fig/BOLD/ \n")

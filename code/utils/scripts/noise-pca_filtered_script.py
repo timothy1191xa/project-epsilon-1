@@ -2,7 +2,10 @@
 This script is used to design the design matrix for our linear regression.
 We explore the influence of linear and quadratic drifts on the model 
 performance.
-
+Script for the filtered data.
+Run with:
+    python noise-pca_filtered_script.py
+    from this directory
 """
 from __future__ import print_function, division
 import sys, os, pdb
@@ -34,7 +37,7 @@ project_path = '../../../'
 data_path = project_path+'data/ds005/' 
 path_dict = {'data_filtered':{ 
 			      'type' : 'filtered',
-			      'feat' : '.feat/',
+			      'feat' : '.feat',
 			      'bold_img_name' : 'filtered_func_data_mni.nii.gz',
 			      'run_path' : 'model/model001/'
 			     },
@@ -51,7 +54,7 @@ path_dict = {'data_filtered':{
 
 # Run only for subject 1 and 5 - run 1
 run_list = [str(i) for i in range(1,2)]
-subject_list = ['1','5']
+subject_list = ['1', '5']
 
 d_path = path_dict['data_filtered'] #OR original or filtered 
 
@@ -70,6 +73,7 @@ plt.rcParams['image.interpolation'] = 'nearest'
 thres = 375 #From analysis of the histograms   
 # To be used with the filtered data
 mask_path = project_path+'data/mni_icbm152_t1_tal_nlin_asym_09c_mask_2mm.nii'
+template_path = project_path+'data/mni_icbm152_t1_tal_nlin_asym_09c_2mm.nii'
 
 sm = ''
 #sm='not_smooth/'
@@ -92,24 +96,47 @@ for d in dirs:
     if not os.path.exists(d):
         os.makedirs(d)
 
+# Progress bar
+print("\nStarting noise-pca for filtered data analysis\n")
+
 for image_path in images_paths:
     name = image_path[0]
     if d_path['type']=='filtered':
-        in_brain_img = nib.load('../../../'+
-	    'data/ds005/sub001/model/model001/task001_run001.feat/'\
-	    + 'masked_filtered_func_data_mni.nii.gz')
+        #in_brain_img = nib.load('../../../'+
+	#    'data/ds005/sub001/model/model001/task001_run001.feat/'\
+	#    + 'masked_filtered_func_data_mni.nii.gz')
 	# Image shape (91, 109, 91, 240)
-	#in_brain_img = make_mask_filtered_data(image_path[1],mask_path)
-	data = in_brain_img.get_data()
+        md = data_path + 'sub%s/'%(s.zfill(3)) + d_path['run_path'] \
+        + 'task001_run%s%s/masked_%s' %(r.zfill(3),d_path['feat'],\
+        d_path['bold_img_name']) 
+        if not os.path.exists(md):
+            print("Filtering brain image for: ")
+	    print(str(name))
+            in_brain_img = make_mask_filtered_data(image_path[1],mask_path)
+	    print("brain image filtered\n")
+        else:
+	    print("Loading filtered brain image for: ")
+	    print(str(name))
+            in_brain_img = nib.load(md)
+            print("brain image loaded\n")
+        data_int = in_brain_img.get_data()
+        data = data_int.astype(float)
         mean_data = np.mean(data, axis=-1)
-        in_brain_mask = (mean_data - 0.0) < 0.01	
+        template = nib.load(template_path)
+	template_data_int = template.get_data()
+	template_data = template_data_int.astype(float)
 	Transpose = False
+        in_brain_mask = (mean_data - 0.0) < 0.01
+        plt.imshow(plot_mosaic(template_data, transpose=Transpose),\
+				        cmap='gray', alpha=1)
     else:
         img = nib.load(image_path[1])
         data = img.get_data()
         mean_data = np.mean(data, axis=-1)
         in_brain_mask = mean_data > thres
 	Transpose = True
+        plt.contour(plot_mosaic(in_brain_mask, transpose=Transpose), \
+	            cmap='gray' , alpha=1)
     # Smoothing with Gaussian filter
     smooth_data = smoothing(data,1,range(data.shape[-1])) 
 
@@ -120,9 +147,8 @@ for image_path in images_paths:
     # Plotting the voxels in the brain
     plt.imshow(plot_mosaic(mean_data, transpose=Transpose), cmap='gray', alpha=1)
     plt.colorbar()
-    plt.contour(plot_mosaic(in_brain_mask, transpose=Transpose),colors='blue')
     plt.title('In brain voxel mean values' + '\n' +  (d_path['type'] + str(name)))
-    plt.savefig(project_path+'fig/BOLD/%s_mean_voxels_countour.png'\
+    plt.savefig(project_path+'fig/BOLD/%s_mean_voxels.png'\
                 %(d_path['type'] + str(name)))
     #plt.show()
     #plt.clf()
@@ -347,13 +373,13 @@ for image_path in images_paths:
 #		%(name, d_path['type'] + str(name),str(reg_str[k])))
 #        pdb.set_trace() 
 #    pdb.set_trace() 
-
+    plt.close()
+    print("=")
 
 print("======================================")
-print("\n Noise and PCA analysis done")
-print("Design Matrix including drift terms \
-      stored in project_epsilon/txt_output/drifts/ \n\n")
-print("Design Matrix including PCs terms \
-      stored in project_epsilon/txt_output/pca/\n\n")
+print("\n Noise and PCA analysis for filtered data done")
+print("Design Matrix including drift terms stored in project_epsilon/txt_output/drifts/ \n\n")
+print("Design Matrix including PCs terms stored in project_epsilon/txt_output/pca/\n\n")
+print("Mean MRSS models results in  project_epsilon/txt_output/MRSS/ds005filtered_MRSS.json\n\n")
 
 
