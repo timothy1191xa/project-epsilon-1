@@ -120,7 +120,7 @@ for image_path in images_paths:
             in_brain_img = nib.load(md)
             print("brain image loaded\n")
         data_int = in_brain_img.get_data()
-	data = data_int.astype(float)
+        data = data_int.astype(float)
         mean_data = np.mean(data, axis=-1)
         template = nib.load(template_path)
 	template_data_int = template.get_data()

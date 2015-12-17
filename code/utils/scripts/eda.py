@@ -70,8 +70,8 @@ for dat in path_dict:
                      for s in subject_list]
     for image_path in images_paths:
         name = image_path[0]
-	data_int = nib.load(image_path[1]).get_data()
-	data = data_int.astype(float)
+        data_int = nib.load(image_path[1]).get_data()
+        data = data_int.astype(float)
         mean_data = np.mean(data, axis=-1)
         # Plot
         if d_path['type']=='filtered':
@@ -94,7 +94,7 @@ for dat in path_dict:
                     %(d_path['type'] + str(name)))
         #plt.show()
         plt.clf()
-	plt.close()
+        plt.close()
         sys.stdout.write("\n\b=")
         sys.stdout.flush()
 
