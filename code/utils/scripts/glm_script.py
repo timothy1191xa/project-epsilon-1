@@ -24,8 +24,8 @@ conv_high_res_path = project_path + 'txt_output/conv_high_res/'
 
 # select your own subject
 #subject_list = [str(i) for i in range(1,17)]
-subject_list = ['1','5', '11']
-run_list = [str(i) for i in range(1,4)]
+subject_list = ['1','5']
+run_list = [str(i) for i in range(1,2)]
 conv_list = [str(i) for i in range(1,5)]
 
 txt_paths = [('ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv'+ c.zfill(3),\
@@ -43,13 +43,15 @@ txt_paths = [('ds005_sub' + s.zfill(3) + '_t1r' + r +'_conv'+ c.zfill(3),\
                 for s in subject_list \
                 for c in conv_list]
 
+print("\n====================================================")
+
 for txt_path in txt_paths:
 # get 4_d image data
     name = txt_path[0]
-    
+    print("Starting glm analysis for subject " +name[9:12]+ " condition " + name[24])    
     img = nib.load(txt_path[5])
-    data = img.get_data()
-    
+    data_int = img.get_data()
+    data = data_int.astype(float)
     p = 5
     # p is the number of columns in our design matrix
     # it is the number of convolved column plus 1 (a column of 1's)
@@ -104,3 +106,7 @@ for txt_path in txt_paths:
     file.write("\n")
     file.write("MRSS of multiple regression for" +name[0:17]+ " using high_res design matrix is: "+str(np.mean(MRSS_high_res))+"\n")
     file.close()
+print("GLM analysis done.")
+print("See MRSS project-epsilon/txt_output/mrss/" + name[0:17])
+
+

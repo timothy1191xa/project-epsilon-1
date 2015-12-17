@@ -39,27 +39,28 @@ subject_list = [str(i) for i in range(1,17)]
 conv_list = [str(i) for i in range(1,5)]
 
 txt_paths = [('ds005_sub' + s.zfill(3) + '_t1r1' +'_cond'+ c.zfill(3),\
-              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv001_canonical.txt', \
-              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv002_canonical.txt', \
-              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv003_canonical.txt', \
-              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv004_canonical.txt', \
+              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv001_canonical.txt', \
+              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv002_canonical.txt', \
+              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv003_canonical.txt', \
+              conv_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv004_canonical.txt', \
               '../../../data/ds005/sub' + s.zfill(3) + '/model/model001/task001_run002' \
-              #for me (Min) it's ds005_2... the filtered data set
               + '.feat/filtered_func_data_mni.nii.gz',\
-              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv_001_high_res.txt',\
-              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv_002_high_res.txt',\
-              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv_003_high_res.txt',\
-              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r2' +'_conv_004_high_res.txt') \
+              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv_001_high_res.txt',\
+              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv_002_high_res.txt',\
+              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv_003_high_res.txt',\
+              conv_high_res_path + 'ds005_sub' + s.zfill(3) + '_t1r1' +'_conv_004_high_res.txt') \
                 for s in subject_list \
                 for c in conv_list]
 
+print("\n==================================================")
+
 for txt_path in txt_paths:
 # get 4_d image data
-    name = txt_path[0]
-    
+    name = txt_path[0] 
+    print("Starting analysis for subject " + name[9:12] + " condition " + name[24])
     img = nib.load(txt_path[5])
-    data = img.get_data()
-    
+    data_int = img.get_data()
+    data =  data_int.astype(float)
     p = 7
     # p is the number of columns in our design matrix
     # it is the number of convolved column plus 1 (a column of 1's)
@@ -93,4 +94,6 @@ for txt_path in txt_paths:
     np.savetxt(location_of_txt + '/' +name[0:17]+ "_beta_gain.txt",beta_3d_smooth_gain.ravel())
     np.savetxt(location_of_txt + '/' +name[0:17]+ "_beta_loss.txt",beta_3d_smooth_loss.ravel())
     np.savetxt(location_of_txt + '/' +name[0:17]+ "_beta_dist.txt",beta_3d_smooth_dist.ravel())
-    
+print("\nAll betas generated from the multi glm analysis")
+print("See project-epsilon/" + location_of_txt + " to for the txt files containing the betas")
+
