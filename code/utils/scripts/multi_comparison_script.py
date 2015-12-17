@@ -18,7 +18,7 @@ import sys, os
 sys.path.append(os.path.join(os.path.dirname('__file__'), "../functions/"))
 sys.path.append(os.path.join(os.path.dirname('__file__'), "./"))
 import numpy as np
-from glm import *
+from glm_func import *
 import nibabel as nib
 from matplotlib import colors
 import matplotlib.pyplot as plt

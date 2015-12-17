@@ -29,7 +29,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "./"))
 from smoothing import *
 from diagnostics import *
-from glm import *
+from glm_func import *
 from plot_mosaic import * 
 from mask_filtered_data import *
 

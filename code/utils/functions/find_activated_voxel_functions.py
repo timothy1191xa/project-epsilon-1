@@ -2,7 +2,6 @@ from __future__ import division, print_function, absolute_import
 import numpy as np
 from functools import reduce
 from itertools import product
-from t_test import *
 
 def size(shape, axis=None):
     """
