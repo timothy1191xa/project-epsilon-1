@@ -56,9 +56,7 @@ template_path = project_path+'data/mni_icbm152_t1_tal_nlin_asym_09c_2mm.nii'
 l = len(subject_list)*len(run_list)
 sys.stdout.write("Starting EDA analysis\n")
 sys.stdout.write("EDA: ")
-sys.stdout.write("[%s]" % (" " * l))
 sys.stdout.flush()
-sys.stdout.write("\b" * (l + 1))
 
 # Loop through the data type - raw or filtered
 for dat in path_dict:
@@ -96,10 +94,10 @@ for dat in path_dict:
                     %(d_path['type'] + str(name)))
         #plt.show()
         plt.clf()
-
-        plt.clf()
-        sys.stdout.write("=")
+	plt.close()
+        sys.stdout.write("\n\b=")
         sys.stdout.flush()
+
 sys.stdout.write("======================================\n")
 sys.stdout.write("EDA analysis done\n")
 sys.stdout.write("Mosaic plots in project_epsilon/fig/BOLD/ \n")
