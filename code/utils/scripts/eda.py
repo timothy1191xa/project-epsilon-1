@@ -17,7 +17,7 @@ from mask_filtered_data import *
 
 # Locate the paths
 project_path = '../../../'
-data_path = project_path+'data/ds005_temp/' 
+data_path = project_path+'data/ds005/' 
 path_dict = {'data_filtered':{ 
 			      'type' : 'filtered',
 			      'feat' : '.feat/',
