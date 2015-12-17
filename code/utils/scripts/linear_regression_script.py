@@ -1,9 +1,12 @@
 """ Linear Regression on Begavioral data """
 
-import sys
-sys.path.append("../functions")
+import sys, os
+#TODO : later change this
+sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
+
 from linear_regression import *
 from scipy import stats
+
 
 # Get the data
 all_subjects= ['001', '002' ,'003', '004', '005', '006', '007', '008', '009', '010', '011', '012', '013', '014', '015', '016']
@@ -11,6 +14,11 @@ all_subjects= ['001', '002' ,'003', '004', '005', '006', '007', '008', '009', '0
 project_path = '../../../'
 data_dir = project_path+'data/'
 
+# directory for plot
+dirs = ['../../../fig','../../../fig/lin']
+for d in dirs:
+    if not os.path.exists(d):
+            os.makedirs(d)
 
 ########################
 # combine all the data #
@@ -92,12 +100,12 @@ X = np.column_stack((np.ones(n), x))
 B = npl.pinv(X).dot(y)
 
 # Get the regression line
-def my_line(x, B):
-    # Best prediction 
-	return B[0] + B[1] * x
+#def my_line(x, B):
+#    # Best prediction 
+#	return B[0] + B[1] * x
 
 x_vals = [0, max(x)] # since the ratio wouldn't be negative
-y_vals = [my_line(0, B), my_line(max(x), B)]
+y_vals = [B[0], (B[0] + B[1] * max(x) )]
 # Plot the simple linear regression
 plt.plot(x, y, '+')
 plt.xlabel('ratio (gain/loss)')
@@ -105,5 +113,7 @@ plt.ylabel('Response Time')
 plt.plot(x_vals, y_vals)
 plt.title('Ratio vs Response Time with predicted line')
 plt.show()
+plt.savefig(dirs[1]+'/linear_regression.png')
+plt.close()
 
 
