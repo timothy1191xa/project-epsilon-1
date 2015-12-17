@@ -47,7 +47,7 @@ path_dict = {'data_filtered':{
 
 # TODO: uncomment for final version
 #subject_list = [str(i) for i in range(1,17)]
-subject_list = ['1','5','11']
+subject_list = ['1','5']
 run_list = [str(i) for i in range(1,4)]
 cond_list = [str(i) for i in range(1,5)]
 
@@ -61,11 +61,15 @@ images_paths = [('ds005' +'_sub' + s.zfill(3) + '_t1r' + r, \
                  for r in run_list \
                  for s in subject_list]
 
+print("\n=====================================================")
+
 thres = 375 #from analysis of the histograms
 for image_path in images_paths:
     name = image_path[0]
+    print("Starting t-test analysis and plot for subject "+name[9:12])
     img = nib.load(image_path[1])
-    data = img.get_data()
+    data_int = img.get_data()
+    data = data_int.astype(float)
     vol_shape = data.shape[:-1]
     n_trs = data.shape[-1]
     #get the mean value
@@ -102,44 +106,6 @@ for image_path in images_paths:
         plt.colorbar()
         plt.savefig(dirs[1]+'/'+ name +'_t-test_'+'cond'+str(cond+1)+'.png')
         plt.close()
-
-#t2 = np.reshape(t[2,:], vol_shape)
-#n_vol = np.mean(data, axis=-1)t2[~in_brain_mask]=np.nan
-#for i in range(34):
-# plt.subplot(5,7,i+1)
-# plt.imshow(t2[:,:,i])
-# plt.title("Slice"+str(i+1), fontsize=5)
-# plt.tight_layout()
-
-#plt.suptitle("Subject 1 Run 1 T Statistics in Condition 2 for different Slices\n")
-#plt.colorbar()
-#plt.savefig(location_of_plot+"t_statistics_for_condition_2")
-#plt.close()
-
-#t3 = np.reshape(t[3,:],vol_shape)
-#t3[~in_brain_mask]=np.nan
-#for i in range(34):
- #plt.subplot(5,7,i+1)
-# plt.imshow(t3[:,:,i])
- #plt.title("Slice"+str(i+1), fontsize=5)
-# plt.tight_layout()
-
-#plt.suptitle("Subject 1 Run 1 T Statistics in Condition 3 for different Slices\n")
-#plt.colorbar()
-#plt.savefig(location_of_plot+"t_statistics_for_condition_3")
-#plt.close()
-
-#t4 = np.reshape(t[4,:],vol_shape)
-#t4[~in_brain_mask]=np.nan
-#for i in range(34):
-# plt.subplot(5,7,i+1)
-# plt.imshow(t4[:,:,i])
-# plt.title("Slice"+str(i+1), fontsize=5)
-# plt.tight_layout()
-
-#plt.suptitle("Subject 1 Run 1 T Statistics in Condition 4 for different Slices\n")
-#plt.colorbar()
-#plt.savefig(location_of_plot+"t_statistics_for_condition_4")
-#plt.close()
-
+print("T-test analysis and plots done for subjects 1 ans 5")
+print("See mosaic plots in project-epsilon/fig/t-test/")
 
