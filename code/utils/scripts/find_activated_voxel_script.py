@@ -5,14 +5,14 @@ sys.path.append(".././utils")
 import nibabel as nib
 import matplotlib.pyplot as plt
 from load_BOLD import *
-from t_test import *
+from t_stat import *
 from find_activated_voxel_functions import *
 from convolution_normal_script import X_matrix
 from convolution_high_res_script import X_matrix_high_res
 
 location_of_data = "../../data/ds005/sub001/BOLD/task001_run001/"
 data = load_img(1,1)
-beta, t, df,p=t_test(data,X_matrix_high_res)
+beta, t, df,p=t_stat(data,X_matrix_high_res)
 shape = data.shape[:3]
 
 lst = find_activated_voxel(shape, p)

@@ -28,7 +28,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "./"))
 from smoothing import *
 from diagnostics import *
-from glm import *
+from glm_func import *
 from plot_mosaic import * 
 from mask_filtered_data import *
 
@@ -131,7 +131,8 @@ for image_path in images_paths:
 				        cmap='gray', alpha=1)
     else:
         img = nib.load(image_path[1])
-        data = img.get_data()
+        data_int = img.get_data()
+	data = data_int.astype(float)
         mean_data = np.mean(data, axis=-1)
         in_brain_mask = mean_data > thres
 	Transpose = True

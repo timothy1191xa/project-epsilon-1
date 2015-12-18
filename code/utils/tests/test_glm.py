@@ -1,5 +1,5 @@
-""" Tests for glm function in glm module
-This checks the glm function.
+""" test_glm.py_
+This script checks the glm function.
 
 Run at the tests directory with:
     nosetests code/utils/tests/test_glm.py
@@ -13,20 +13,19 @@ import os
 import sys
 from numpy.testing import assert_almost_equal, assert_array_equal
 
-
 # Add path to functions to the system path.
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
-
 # Load our GLM functions. 
-from glm import glm_beta, glm_mrss
+from glm_func import *
 project_path=os.path.join(os.path.dirname(__file__), '../../../')
 
 def test_glm_beta():
     # Read in the image data.
     img = nib.load(project_path + \
           'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
-    data = img.get_data()
+    data_int = img.get_data()
+    data = data_int.astype(float)
     # Read in the convolutions.
     p = 2
     convolved1 = np.loadtxt(project_path + \
@@ -48,7 +47,8 @@ def test_glm_beta():
 def test_glm_mrss():
     img = nib.load(project_path + \
           'data/ds114/sub009/BOLD/task002_run001/ds114_sub009_t2r1.nii')
-    data = img.get_data()
+    data_int = img.get_data()
+    data = data_int.astype(float)
     convolved1 = np.loadtxt(project_path + \
                  'data/ds114/sub009/behav/task002_run001/ds114_sub009_t2r1_conv.txt')
     X_matrix = np.ones((len(convolved1), 2))

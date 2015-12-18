@@ -11,13 +11,12 @@ from numpy.testing import assert_almost_equal, assert_array_equal
 
 #Append path to functions
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
-from t_test import t_stat 
-
+from t_stat import *  
 
 def test_t_stat():
     psychopathy = [11.416,   4.514,  12.204,  14.835,
                    8.416,   6.563,  17.343, 13.02,
-            		   15.19 ,  11.902,  22.721,  22.324]
+      		   15.19 ,  11.902,  22.721,  22.324]
     clammy = [0.389,  0.2  ,  0.241,  0.463,
               4.585,  1.097,  1.642,  4.972,                                
 	      7.957,  5.585,  5.527,  6.964]

@@ -39,6 +39,7 @@ data_path = project_path+'data/ds005/'
 
 #change here to get your subject !
 subject_list = [str(i) for i in range(1,17)]
+#subject_list = ['1','5']
 #change here to get your run number !
 run_list = [str(i) for i in range(1,4)]
 cond_list = [str(i) for i in range(1,5)]
@@ -54,7 +55,8 @@ condition = ['task','gain','loss','dist']
 #Use the first image to get the data dimensions
 image_path = data_path + 'sub001/BOLD/task001_run001/bold.nii.gz'
 img = nib.load(image_path)
-data = img.get_data()
+data_int = img.get_data()
+data = data_int.astype(float)
 #set the TR
 TR = 2.0
 

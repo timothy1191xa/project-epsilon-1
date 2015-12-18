@@ -23,7 +23,7 @@ test:
 	nosetests tests 
 
 coverage:
-	nosetests tests --with-coverage --cover-package=data_hashes.py 
+	nosetests tests --with-coverage --cover-package=data_hashes.py, tests/test_get_check_hashes.py 
 
 download_all:
 	make download_data

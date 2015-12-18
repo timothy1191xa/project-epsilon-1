@@ -11,7 +11,7 @@ For each subject each run each condition, plot the t statistics
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), "../functions/"))
 
-from t_test import *
+from t_stat import *
 from smoothing import *
 from matplotlib import colors
 from plot_mosaic import * 
@@ -33,7 +33,7 @@ data_path = project_path + 'data/'
 txt_path = project_path + 'txt_output/conv_high_res/'
 #txt_path = project_path + 'txt_output/conv_normal/'
 path_dict = {'data_filtered':{
-	   		      'folder' : 'ds005_2/', 
+	   		      'folder' : 'ds005/', 
 			      'bold_img_name' : 'filtered_func_data_mni.nii.gz',
 			      'run_path' : 'model/model001/',
 			      'feat' : '.feat/'
@@ -46,8 +46,8 @@ path_dict = {'data_filtered':{
 			     }}
 
 # TODO: uncomment for final version
-#subject_list = [str(i) for i in range(1,17)]
-subject_list = ['1','5','11']
+subject_list = [str(i) for i in range(1,17)]
+#subject_list = ['1','5']
 run_list = [str(i) for i in range(1,4)]
 cond_list = [str(i) for i in range(1,5)]
 
@@ -61,11 +61,16 @@ images_paths = [('ds005' +'_sub' + s.zfill(3) + '_t1r' + r, \
                  for r in run_list \
                  for s in subject_list]
 
+print("\n=====================================================")
+
 thres = 375 #from analysis of the histograms
 for image_path in images_paths:
     name = image_path[0]
+    print("Starting t-test analysis and plot for subject "+name[9:12])
+    pdb.set_trace()
     img = nib.load(image_path[1])
-    data = img.get_data()
+    data_int = img.get_data()
+    data = data_int.astype(float)
     vol_shape = data.shape[:-1]
     n_trs = data.shape[-1]
     #get the mean value
@@ -89,6 +94,7 @@ for image_path in images_paths:
     X_matrix[:,6] = quadratic_drift
     beta, t, df, p = t_stat(smooth_data, X_matrix)
     for cond in range(0,4):
+        print("Starting test for condition " + str(i))
         t_newshape = np.reshape(t[cond,:],vol_shape)
         t_newshape[~in_brain_mask]=np.nan
         t_T = np.zeros(vol_shape)
@@ -102,44 +108,6 @@ for image_path in images_paths:
         plt.colorbar()
         plt.savefig(dirs[1]+'/'+ name +'_t-test_'+'cond'+str(cond+1)+'.png')
         plt.close()
-
-#t2 = np.reshape(t[2,:], vol_shape)
-#n_vol = np.mean(data, axis=-1)t2[~in_brain_mask]=np.nan
-#for i in range(34):
-# plt.subplot(5,7,i+1)
-# plt.imshow(t2[:,:,i])
-# plt.title("Slice"+str(i+1), fontsize=5)
-# plt.tight_layout()
-
-#plt.suptitle("Subject 1 Run 1 T Statistics in Condition 2 for different Slices\n")
-#plt.colorbar()
-#plt.savefig(location_of_plot+"t_statistics_for_condition_2")
-#plt.close()
-
-#t3 = np.reshape(t[3,:],vol_shape)
-#t3[~in_brain_mask]=np.nan
-#for i in range(34):
- #plt.subplot(5,7,i+1)
-# plt.imshow(t3[:,:,i])
- #plt.title("Slice"+str(i+1), fontsize=5)
-# plt.tight_layout()
-
-#plt.suptitle("Subject 1 Run 1 T Statistics in Condition 3 for different Slices\n")
-#plt.colorbar()
-#plt.savefig(location_of_plot+"t_statistics_for_condition_3")
-#plt.close()
-
-#t4 = np.reshape(t[4,:],vol_shape)
-#t4[~in_brain_mask]=np.nan
-#for i in range(34):
-# plt.subplot(5,7,i+1)
-# plt.imshow(t4[:,:,i])
-# plt.title("Slice"+str(i+1), fontsize=5)
-# plt.tight_layout()
-
-#plt.suptitle("Subject 1 Run 1 T Statistics in Condition 4 for different Slices\n")
-#plt.colorbar()
-#plt.savefig(location_of_plot+"t_statistics_for_condition_4")
-#plt.close()
-
+print("\nT-test analysis and plots done for selected subjects")
+print("See mosaic plots in project-epsilon/fig/t-test/")
 
