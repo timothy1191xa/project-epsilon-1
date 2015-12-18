@@ -17,6 +17,9 @@ verbose:
 data:
 	cd data && make download_all
 
+filtered_data_only:
+	cd data && make download_filtered_data
+
 validate_data:
 	cd data && make validate_data
 
@@ -38,9 +41,6 @@ convolution-high:
 
 convolution-normal:
 	cd code/utils/scripts && python convolution_normal_script.py
-
-correlation:
-	cd code/utils/scripts && python correlation_script.py
 
 glm:
 	cd code/utils/scripts && python glm_script.py
